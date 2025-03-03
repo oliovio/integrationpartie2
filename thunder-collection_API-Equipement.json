@@ -1,0 +1,275 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "API-Equipement",
+    "dateExported": "2025-03-03T20:26:02.000Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "name": "Auth",
+            "items": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/auth/register",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/auth/login",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "items": [
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/users"
+                    }
+                },
+                {
+                    "name": "Get User by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/users/1"
+                    }
+                },
+                {
+                    "name": "Create User",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/users",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"New User\",\n  \"email\": \"new@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update User",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:5000/api/users/1",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Updated User\",\n  \"email\": \"updated@example.com\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:5000/api/users/1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Equipements",
+            "items": [
+                {
+                    "name": "Get All Equipements",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/equipements"
+                    }
+                },
+                {
+                    "name": "Get Equipement by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/equipements/1"
+                    }
+                },
+                {
+                    "name": "Create Equipement",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/equipements",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Nouvel Équipement\",\n  \"type\": \"Ordinateur\",\n  \"statut\": \"Disponible\",\n  \"departmentId\": 1\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Equipement",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:5000/api/equipements/1",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Équipement Modifié\",\n  \"statut\": \"En maintenance\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Equipement",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:5000/api/equipements/1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Departments",
+            "items": [
+                {
+                    "name": "Get All Departments",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/departments"
+                    }
+                },
+                {
+                    "name": "Get Department by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/departments/1"
+                    }
+                },
+                {
+                    "name": "Create Department",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/departments",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Nouveau Département\",\n  \"description\": \"Description du département\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Department",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:5000/api/departments/1",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Département Modifié\",\n  \"description\": \"Nouvelle description\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Department",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:5000/api/departments/1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Roles",
+            "items": [
+                {
+                    "name": "Get All Roles",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/roles"
+                    }
+                },
+                {
+                    "name": "Get Role by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/roles/1"
+                    }
+                },
+                {
+                    "name": "Create Role",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/roles",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Nouveau Rôle\",\n  \"description\": \"Description du rôle\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Role",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:5000/api/roles/1",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"nom\": \"Rôle Modifié\",\n  \"description\": \"Nouvelle description\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Role",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:5000/api/roles/1"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Maintenance History",
+            "items": [
+                {
+                    "name": "Get All Maintenance History",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/maintenance-history"
+                    }
+                },
+                {
+                    "name": "Get Maintenance History by ID",
+                    "request": {
+                        "method": "GET",
+                        "url": "http://localhost:5000/api/maintenance-history/1"
+                    }
+                },
+                {
+                    "name": "Create Maintenance History",
+                    "request": {
+                        "method": "POST",
+                        "url": "http://localhost:5000/api/maintenance-history",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"equipementId\": 1,\n  \"description\": \"Maintenance préventive\",\n  \"date\": \"2025-03-03\",\n  \"technicienId\": 1\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Maintenance History",
+                    "request": {
+                        "method": "PUT",
+                        "url": "http://localhost:5000/api/maintenance-history/1",
+                        "body": {
+                            "type": "json",
+                            "raw": "{\n  \"description\": \"Maintenance corrective\",\n  \"date\": \"2025-03-04\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Maintenance History",
+                    "request": {
+                        "method": "DELETE",
+                        "url": "http://localhost:5000/api/maintenance-history/1"
+                    }
+                }
+            ]
+        }
+    ]
+}

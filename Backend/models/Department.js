@@ -1,39 +1,70 @@
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/dataBase.js';
+import sequelize from '../config/database.js';
 
 const Department = sequelize.define('Department', {
-  nom: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      notEmpty: true
+    id_departement: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    nom: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true,
+        validate: {
+            notEmpty: true,
+            len: [2, 100]
+        }
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        validate: {
+            len: [0, 1000]
+        }
+    },
+    responsable_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Users',
+            key: 'id_utilisateur'
+        }
+    },
+    localisation: {
+        type: DataTypes.STRING(100),
+        allowNull: true,
+        validate: {
+            len: [0, 100]
+        }
+    },
+    budget_annuel: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true,
+        validate: {
+            isDecimal: true,
+            min: 0
+        }
+    },
+    actif: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     }
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true
-  },
-  responsable: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  localisation: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  budget_annuel: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: false
-  },
-  date_creation: {
-    type: DataTypes.DATE,
-    allowNull: false
-  }
 }, {
-  timestamps: true, // Ajoute les champs 'createdAt' et 'updatedAt' par défaut
-  underscored: true, // Utilisation de noms de colonnes avec un underscore
-  freezeTableName: true // Empêche Sequelize de modifier le nom de la table
+    tableName: 'Departments',
+    timestamps: true,
+    createdAt: 'date_creation',
+    updatedAt: 'date_modification',
+    indexes: [
+        {
+            unique: true,
+            fields: ['nom']
+        },
+        {
+            fields: ['responsable_id']
+        }
+    ]
 });
 
 export default Department;

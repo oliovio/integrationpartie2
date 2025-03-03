@@ -5,7 +5,7 @@ import Equipement from './Equipement.js';
 import MaintenanceHistory from './Maintenance.js';
 import Category from './Category.js';
 
-import { sequelize } from '../config/dataBase.js';
+import { sequelize } from '../config/database.js';
 
 // Création des relations
 

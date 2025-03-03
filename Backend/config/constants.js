@@ -1,0 +1,52 @@
+// Types d'équipements
+export const EQUIPMENT_TYPES = {
+    COMPUTER: 'COMPUTER',
+    PRINTER: 'PRINTER',
+    NETWORK: 'NETWORK',
+    SERVER: 'SERVER',
+    PHONE: 'PHONE',
+    TABLET: 'TABLET',
+    OTHER: 'OTHER'
+};
+
+// Statuts d'équipements
+export const EQUIPMENT_STATUS = {
+    AVAILABLE: 'AVAILABLE',
+    IN_USE: 'IN_USE',
+    IN_MAINTENANCE: 'IN_MAINTENANCE',
+    BROKEN: 'BROKEN',
+    RETIRED: 'RETIRED'
+};
+
+// Types de maintenance
+export const MAINTENANCE_TYPES = {
+    PREVENTIVE: 'PREVENTIVE',
+    CORRECTIVE: 'CORRECTIVE',
+    UPGRADE: 'UPGRADE',
+    INSPECTION: 'INSPECTION'
+};
+
+// Statuts de maintenance
+export const MAINTENANCE_STATUS = {
+    PLANNED: 'PLANNED',
+    IN_PROGRESS: 'IN_PROGRESS',
+    COMPLETED: 'COMPLETED',
+    CANCELLED: 'CANCELLED'
+};
+
+// Rôles utilisateurs
+export const USER_ROLES = {
+    ADMIN: 'ADMIN',
+    MANAGER: 'MANAGER',
+    TECHNICIAN: 'TECHNICIAN',
+    USER: 'USER'
+};
+
+// Permissions
+export const PERMISSIONS = {
+    GESTION_UTILISATEURS: 'GESTION_UTILISATEURS',
+    GESTION_EQUIPEMENTS: 'GESTION_EQUIPEMENTS',
+    GESTION_MAINTENANCE: 'GESTION_MAINTENANCE',
+    LECTURE_SEULE: 'LECTURE_SEULE',
+    ADMIN: 'ADMIN'
+};

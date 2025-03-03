@@ -1,121 +1,113 @@
-// Liste des départements
-import { Department } from '../models/Relation.js';
-import { sequelize } from '../config/dataBase.js';
+import Department from '../models/Department.js';
+import { successResponse, errorResponse, paginatedResponse } from '../utils/responseFormatter.js';
+import logger from '../config/logger.js';
 
-export const departmentList = async (req, res) => {
+// Récupérer tous les départements avec pagination
+export const getDepartments = async (req, res, next) => {
     try {
-        const departments = await Department.findAll();
-        if (!departments.length) {
-            return res.status(404).json({ message: 'Aucun département trouvé' });
-        }
-        res.status(200).json({ data: departments });
-    } catch (err) {
-        res.status(500).json({ message: 'Erreur lors de la récupération des départements', error: err.message });
-    }
-};
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const offset = (page - 1) * limit;
 
-// Créer un nouveau département
-// Créer un nouveau département
-export const addDepartment = async (req, res) => {
-    const { nom, description, responsable, localisation, budget_annuel, date_creation } = req.body;
-
-    if (!nom) {
-        return res.status(400).json({ message: 'Le nom du département est requis' });
-    }
-
-    try {
-        // Vérifier si un département avec ce nom existe déjà
-        const existingDepartment = await Department.findOne({ where: { nom } });
-        if (existingDepartment) {
-            return res.status(400).json({ message: 'Ce département existe déjà' });
-        }
-
-        // Créer un département avec les nouveaux champs
-        const result = await Department.create({
-            nom,
-            description,
-            responsable,
-            localisation,
-            budget_annuel,
-            date_creation
+        const { count, rows } = await Department.findAndCountAll({
+            limit,
+            offset,
+            order: [['nom', 'ASC']]
         });
 
-        res.status(201).json({ 
-            message: 'Département créé avec succès', 
-            data: result 
-        });
-    } catch (err) {
-        res.status(500).json({ 
-            message: 'Erreur lors de la création du département', 
-            error: err.message 
-        });
-    }
-};
+        const response = paginatedResponse(
+            'Départements récupérés avec succès',
+            rows,
+            page,
+            limit,
+            count
+        );
 
-// Récupérer un département par ID
-export const getDepartmentById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const department = await Department.findByPk(id);
-        
-        if (department) {
-            res.status(200).json({
-                message: 'Département trouvé avec succès',
-                data: department
-            });
-        } else {
-            res.status(404).json({ message: 'Département non trouvé' });
-        }
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            message: 'Erreur lors de la récupération du département',
-            error: error.message
-        });
+        next(error);
+    }
+};
+
+// Récupérer un département par son ID
+export const getDepartmentById = async (req, res, next) => {
+    try {
+        const department = await Department.findByPk(req.params.id);
+
+        if (!department) {
+            const response = errorResponse('Département non trouvé', null, 404);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        const response = successResponse('Département récupéré avec succès', department);
+        res.status(response.statusCode).json(response.body);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Créer un nouveau département
+export const createDepartment = async (req, res, next) => {
+    try {
+        const department = await Department.create(req.body);
+        logger.info(`Nouveau département créé: ${department.nom}`);
+
+        const response = successResponse('Département créé avec succès', department, 201);
+        res.status(response.statusCode).json(response.body);
+    } catch (error) {
+        next(error);
     }
 };
 
 // Mettre à jour un département
-export const updateDepartment = async (req, res) => {
+export const updateDepartment = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const { nom, description, responsable, localisation, budget_annuel, date_creation } = req.body;
+        const department = await Department.findByPk(req.params.id);
 
-        // Chercher le département à mettre à jour
-        const department = await Department.findByPk(id);
         if (!department) {
-            return res.status(404).json({ message: 'Département non trouvé' });
+            const response = errorResponse('Département non trouvé', null, 404);
+            return res.status(response.statusCode).json(response.body);
         }
 
-        // Mettre à jour le département avec les nouveaux champs
-        await Department.update(
-            { nom, description, responsable, localisation, budget_annuel, date_creation },
-            { where: { id } }
-        );
+        await department.update(req.body);
+        logger.info(`Département mis à jour: ${department.nom}`);
 
-        res.status(200).json({ message: 'Département mis à jour avec succès' });
+        const response = successResponse('Département mis à jour avec succès', department);
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            message: 'Erreur lors de la mise à jour du département',
-            error: error.message
-        });
+        next(error);
     }
 };
 
 // Supprimer un département
-export const deleteDepartment = async (req, res) => {
+export const deleteDepartment = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const result = await Department.destroy({ where: { id } });
-        
-        if (result) {
-            res.status(200).json({ message: 'Département supprimé avec succès' });
-        } else {
-            res.status(404).json({ message: 'Département non trouvé' });
+        const department = await Department.findByPk(req.params.id);
+
+        if (!department) {
+            const response = errorResponse('Département non trouvé', null, 404);
+            return res.status(response.statusCode).json(response.body);
         }
+
+        // Vérifier si le département a des utilisateurs ou des équipements
+        const hasUsers = await department.countUtilisateurs();
+        const hasEquipments = await department.countEquipements();
+
+        if (hasUsers > 0 || hasEquipments > 0) {
+            const response = errorResponse(
+                'Impossible de supprimer le département car il contient des utilisateurs ou des équipements',
+                null,
+                400
+            );
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        await department.update({ actif: false });
+        logger.info(`Département désactivé: ${department.nom}`);
+
+        const response = successResponse('Département désactivé avec succès');
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            message: 'Erreur lors de la suppression du département',
-            error: error.message
-        });
+        next(error);
     }
 };

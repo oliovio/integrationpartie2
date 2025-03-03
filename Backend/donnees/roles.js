@@ -1,24 +1,26 @@
 export const roles = [
     {
-        "nom_role": "Administrateur",
-        "description": "Accès complet au système et gestion des utilisateurs"
+        "id": 1,
+        "nom": "Administrateur",
+        "description": "Accès complet au système",
+        "permissions": ["lecture", "ecriture", "suppression", "administration"]
     },
     {
-        "nom_role": "Technicien",
-        "description": "Gestion et maintenance des équipements"
+        "id": 2,
+        "nom": "Gestionnaire",
+        "description": "Gestion des équipements et utilisateurs",
+        "permissions": ["lecture", "ecriture"]
     },
     {
-        "nom_role": "Utilisateur",
-        "description": "Accès limité aux fonctionnalités de base"
+        "id": 3,
+        "nom": "Technicien",
+        "description": "Maintenance des équipements",
+        "permissions": ["lecture", "maintenance"]
     },
     {
-        "nom_role": "Superviseur",
-        "description": "Supervision des équipes et validation des demandes"
-    },
-    {
-        "nom_role": "Gestionnaire",
-        "description": "Gestion des ressources et reporting"
+        "id": 4,
+        "nom": "Support",
+        "description": "Support utilisateur",
+        "permissions": ["lecture"]
     }
 ];
-export const annee = 2024;
-export const cours = "Suivi des équipements informatiques en entreprise";

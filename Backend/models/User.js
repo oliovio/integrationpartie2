@@ -1,44 +1,86 @@
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/dataBase.js';
+import sequelize from '../config/database.js';
 
-const Utilisateur = sequelize.define('User', {
-  id_utilisateur: {
-    type: DataTypes.INTEGER,
-    primaryKey: true, // ID unique pour chaque utilisateur
-    autoIncrement: true, // Incrémentation automatique de l'ID
-  },
-  nom: {
-    type: DataTypes.STRING,
-    allowNull: false, // Le nom ne peut pas être vide
-  },
-  prenom: {
-    type: DataTypes.STRING,
-    allowNull: false, // Le prénom ne peut pas être vide
-  },
-  email: {
-    type: DataTypes.STRING,
-    unique: true, // L'email doit être unique
-    allowNull: false, // L'email ne peut pas être vide
-    validate: {
-      isEmail: true, // Vérifie que l'email est valide
+const User = sequelize.define('User', {
+    id_utilisateur: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
     },
-  },
-  telephone: {
-    type: DataTypes.STRING,
-    allowNull: false, // Le téléphone ne peut pas être vide
-  },
-  date_embauche: {
-    type: DataTypes.DATE,
-    allowNull: false, // La date d'embauche ne peut pas être vide
-  },
-  mot_de_passe: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+    nom: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [2, 50]
+        }
+    },
+    prenom: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [2, 50]
+        }
+    },
+    email: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true
+        }
+    },
+    mot_de_passe: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    telephone: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        validate: {
+            is: /^(\+\d{1,3}[-.]?)?\d{3}[-.]?\d{3}[-.]?\d{4}$/
+        }
+    },
+    date_embauche: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    id_role: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Roles',
+            key: 'id_role'
+        }
+    },
+    id_departement: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Departments',
+            key: 'id_departement'
+        }
+    },
+    actif: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
+    derniere_connexion: {
+        type: DataTypes.DATE
+    }
 }, {
-  timestamps: true, // Ajoute les champs de création et de mise à jour automatiques
-  underscored: true, // Utilisation du snake_case pour les noms de colonnes
-  freezeTableName: true, // Le nom de la table ne sera pas modifié
+    tableName: 'Users',
+    timestamps: true,
+    createdAt: 'date_creation',
+    updatedAt: 'date_modification',
+    indexes: [
+        {
+            unique: true,
+            fields: ['email']
+        }
+    ]
 });
 
-export default Utilisateur;
+export default User;

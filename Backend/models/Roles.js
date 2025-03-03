@@ -1,23 +1,62 @@
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/dataBase.js';
+import sequelize from '../config/database.js';
 
 const Role = sequelize.define('Role', {
-  nom_role: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      notEmpty: true
+    id_role: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    nom: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+        unique: true,
+        validate: {
+            notEmpty: true,
+            len: [2, 50]
+        }
+    },
+    description: {
+        type: DataTypes.STRING(200),
+        allowNull: true,
+        validate: {
+            len: [0, 200]
+        }
+    },
+    permissions: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        defaultValue: [],
+        validate: {
+            isValidPermissions(value) {
+                if (!Array.isArray(value)) {
+                    throw new Error('Les permissions doivent être un tableau');
+                }
+                const validPermissions = [
+                    'GESTION_UTILISATEURS',
+                    'GESTION_EQUIPEMENTS',
+                    'GESTION_MAINTENANCE',
+                    'LECTURE_SEULE',
+                    'ADMIN'
+                ];
+                if (!value.every(perm => validPermissions.includes(perm))) {
+                    throw new Error('Permissions invalides détectées');
+                }
+            }
+        }
     }
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true
-  }
 }, {
-  timestamps: true, // Enregistrement des dates de création et modification
-  underscored: true, // Utilisation du snake_case pour les noms de colonnes
-  freezeTableName: true // Empêche Sequelize de pluraliser le nom de la table
+    tableName: 'Roles',
+    timestamps: true,
+    createdAt: 'date_creation',
+    updatedAt: 'date_modification',
+    indexes: [
+        {
+            unique: true,
+            fields: ['nom']
+        }
+    ]
 });
 
 export default Role;

@@ -1,292 +1,114 @@
-import { Equipement } from '../models/Relation.js';
-import { sequelize } from '../config/dataBase.js';
+import Equipement from '../models/Equipement.js';
+import { successResponse, errorResponse, paginatedResponse } from '../utils/responseFormatter.js';
+import logger from '../config/logger.js';
+import { EQUIPMENT_STATUS } from '../config/constants.js';
 
-// Créer un nouvel équipement
-export const addEquipement = async (req, res) => {
+// Récupérer tous les équipements avec pagination et filtres
+export const getEquipements = async (req, res, next) => {
     try {
-        const {
-            nom,
-            type,
-            marque,
-            modele,
-            numero_serie,
-            date_acquisition,
-            prix_achat,
-            etat,
-            localisation,
-            date_derniere_maintenance,
-            statut,
-            departmentId
-        } = req.body;
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const offset = (page - 1) * limit;
 
-        // Vérification des champs obligatoires
-        if (!nom || !type || !marque || !numero_serie || !date_acquisition || !prix_achat) {
-            return res.status(400).json({
-                success: false,
-                message: 'Veuillez remplir tous les champs obligatoires'
-            });
-        }
+        // Construire les filtres
+        const where = {};
+        if (req.query.type) where.type = req.query.type;
+        if (req.query.statut) where.statut = req.query.statut;
+        if (req.query.id_departement) where.id_departement = req.query.id_departement;
 
-        // Vérification si le numéro de série existe déjà
-        const equipementExistant = await Equipement.findOne({
-            where: { numero_serie }
+        const { count, rows } = await Equipement.findAndCountAll({
+            where,
+            limit,
+            offset,
+            order: [['date_acquisition', 'DESC']]
         });
 
-        if (equipementExistant) {
-            return res.status(400).json({
-                success: false,
-                message: 'Un équipement avec ce numéro de série existe déjà'
-            });
-        }
+        const response = paginatedResponse(
+            'Équipements récupérés avec succès',
+            rows,
+            page,
+            limit,
+            count
+        );
 
-        // Création de l'équipement
-        const nouvelEquipement = await Equipement.create({
-            nom,
-            type,
-            marque,
-            modele,
-            numero_serie,
-            date_acquisition,
-            prix_achat,
-            etat,
-            localisation,
-            date_derniere_maintenance,
-            statut,
-            departmentId
-        });
-
-        res.status(201).json({
-            success: true,
-            message: 'Équipement créé avec succès',
-            data: nouvelEquipement
-        });
-
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la création de l\'équipement',
-            error: error.message
-        });
-    }
-};
-
-// Récupérer tous les équipements
-export const getAllEquipements = async (req, res) => {
-    try {
-        const equipements = await Equipement.findAll({
-            include: ['department']
-        });
-
-        res.status(200).json({
-            success: true,
-            count: equipements.length,
-            data: equipements
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération des équipements',
-            error: error.message
-        });
+        next(error);
     }
 };
 
 // Récupérer un équipement par son ID
-export const getEquipementById = async (req, res) => {
+export const getEquipementById = async (req, res, next) => {
     try {
-        const equipement = await Equipement.findByPk(req.params.id, {
-            include: ['department']
-        });
+        const equipement = await Equipement.findByPk(req.params.id);
 
         if (!equipement) {
-            return res.status(404).json({
-                success: false,
-                message: 'Équipement non trouvé'
-            });
+            const response = errorResponse('Équipement non trouvé', null, 404);
+            return res.status(response.statusCode).json(response.body);
         }
 
-        res.status(200).json({
-            success: true,
-            data: equipement
-        });
-
+        const response = successResponse('Équipement récupéré avec succès', equipement);
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération de l\'équipement',
-            error: error.message
-        });
+        next(error);
+    }
+};
+
+// Créer un nouvel équipement
+export const createEquipement = async (req, res, next) => {
+    try {
+        const equipement = await Equipement.create(req.body);
+        logger.info(`Nouvel équipement créé: ${equipement.nom}`);
+
+        const response = successResponse('Équipement créé avec succès', equipement, 201);
+        res.status(response.statusCode).json(response.body);
+    } catch (error) {
+        next(error);
     }
 };
 
 // Mettre à jour un équipement
-export const updateEquipement = async (req, res) => {
+export const updateEquipement = async (req, res, next) => {
     try {
         const equipement = await Equipement.findByPk(req.params.id);
 
         if (!equipement) {
-            return res.status(404).json({
-                success: false,
-                message: 'Équipement non trouvé'
-            });
-        }
-
-        // Vérification du numéro de série si modifié
-        if (req.body.numero_serie && req.body.numero_serie !== equipement.numero_serie) {
-            const equipementExistant = await Equipement.findOne({
-                where: { numero_serie: req.body.numero_serie }
-            });
-
-            if (equipementExistant) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Ce numéro de série est déjà utilisé'
-                });
-            }
+            const response = errorResponse('Équipement non trouvé', null, 404);
+            return res.status(response.statusCode).json(response.body);
         }
 
         await equipement.update(req.body);
+        logger.info(`Équipement mis à jour: ${equipement.nom}`);
 
-        res.status(200).json({
-            success: true,
-            message: 'Équipement mis à jour avec succès',
-            data: equipement
-        });
-
+        const response = successResponse('Équipement mis à jour avec succès', equipement);
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la mise à jour de l\'équipement',
-            error: error.message
-        });
+        next(error);
     }
 };
 
 // Supprimer un équipement
-export const deleteEquipement = async (req, res) => {
+export const deleteEquipement = async (req, res, next) => {
     try {
         const equipement = await Equipement.findByPk(req.params.id);
 
         if (!equipement) {
-            return res.status(404).json({
-                success: false,
-                message: 'Équipement non trouvé'
-            });
+            const response = errorResponse('Équipement non trouvé', null, 404);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        // Vérifier si l'équipement est en cours d'utilisation
+        if (equipement.statut === EQUIPMENT_STATUS.IN_USE) {
+            const response = errorResponse('Impossible de supprimer un équipement en cours d\'utilisation', null, 400);
+            return res.status(response.statusCode).json(response.body);
         }
 
         await equipement.destroy();
+        logger.info(`Équipement supprimé: ${equipement.nom}`);
 
-        res.status(200).json({
-            success: true,
-            message: 'Équipement supprimé avec succès'
-        });
-
+        const response = successResponse('Équipement supprimé avec succès');
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la suppression de l\'équipement',
-            error: error.message
-        });
-    }
-};
-
-// Rechercher des équipements par département
-export const getEquipementsByDepartment = async (req, res) => {
-    try {
-        const { departmentId } = req.params;
-
-        const equipements = await Equipement.findAll({
-            where: { departmentId },
-            include: ['department']
-        });
-
-        res.status(200).json({
-            success: true,
-            count: equipements.length,
-            data: equipements
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération des équipements par département',
-            error: error.message
-        });
-    }
-};
-
-// Rechercher des équipements par statut
-export const getEquipementsByStatus = async (req, res) => {
-    try {
-        const { statut } = req.params;
-
-        const equipements = await Equipement.findAll({
-            where: { statut },
-            include: ['department']
-        });
-
-        res.status(200).json({
-            success: true,
-            count: equipements.length,
-            data: equipements
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération des équipements par statut',
-            error: error.message
-        });
-    }
-};
-
-// Rechercher des équipements par type
-export const getEquipementsByType = async (req, res) => {
-    try {
-        const { type } = req.params;
-
-        const equipements = await Equipement.findAll({
-            where: { type },
-            include: ['department']
-        });
-
-        res.status(200).json({
-            success: true,
-            count: equipements.length,
-            data: equipements
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération des équipements par type',
-            error: error.message
-        });
-    }
-};
-
-// Rechercher des équipements par marque
-export const getEquipementsByBrand = async (req, res) => {
-    try {
-        const { marque } = req.params;
-
-        const equipements = await Equipement.findAll({
-            where: { marque },
-            include: ['department']
-        });
-
-        res.status(200).json({
-            success: true,
-            count: equipements.length,
-            data: equipements
-        });
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération des équipements par marque',
-            error: error.message
-        });
+        next(error);
     }
 };

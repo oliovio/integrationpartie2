@@ -1,31 +1,33 @@
-import { Router } from 'express';
-import { 
-    addEquipement, 
-    getAllEquipements,
-    getEquipementById,
-    updateEquipement,
-    deleteEquipement,
-    getEquipementsByDepartment,
-    getEquipementsByStatus,  // Ajout de l'importation
-    getEquipementsByType,    // Ajout de l'importation
-    getEquipementsByBrand    // Ajout de l'importation
-} from '../controllers/equipementController.js'; // Assure-toi que ces fonctions existent dans le contrôleur
+import express from 'express';
+import { body } from 'express-validator';
+import { getEquipements, getEquipementById, createEquipement, updateEquipement, deleteEquipement } from '../controllers/equipementController.js';
+import { validateRequest } from '../middleware/validator.js';
+import { authenticate } from '../middleware/auth.js';
+import { EQUIPMENT_TYPES, EQUIPMENT_STATUS } from '../config/constants.js';
 
-const router = Router();
+const router = express.Router();
 
-// Routes principales
-router.post('/', addEquipement);
-router.get('/', getAllEquipements);
+// Validation pour la création/mise à jour d'équipement
+const equipementValidation = [
+    body('nom').trim().isLength({ min: 2, max: 100 }).withMessage('Le nom doit contenir entre 2 et 100 caractères'),
+    body('type').isIn(Object.values(EQUIPMENT_TYPES)).withMessage('Type d\'équipement invalide'),
+    body('marque').optional().isLength({ max: 50 }).withMessage('La marque ne peut pas dépasser 50 caractères'),
+    body('modele').optional().isLength({ max: 50 }).withMessage('Le modèle ne peut pas dépasser 50 caractères'),
+    body('numero_serie').optional().isLength({ max: 50 }).withMessage('Le numéro de série ne peut pas dépasser 50 caractères'),
+    body('date_acquisition').isISO8601().withMessage('Date d\'acquisition invalide'),
+    body('date_fin_garantie').optional().isISO8601().withMessage('Date de fin de garantie invalide'),
+    body('statut').isIn(Object.values(EQUIPMENT_STATUS)).withMessage('Statut invalide'),
+    body('id_departement').isInt().withMessage('ID de département invalide'),
+    body('cout_acquisition').optional().isFloat({ min: 0 }).withMessage('Coût d\'acquisition invalide')
+];
+
+// Routes
+router.use(authenticate); // Protection de toutes les routes équipements
+
+router.get('/', getEquipements);
 router.get('/:id', getEquipementById);
-router.put('/:id', updateEquipement);
+router.post('/', equipementValidation, validateRequest, createEquipement);
+router.put('/:id', equipementValidation, validateRequest, updateEquipement);
 router.delete('/:id', deleteEquipement);
-
-// Route pour filtrer par département
-router.get('/department/:departmentId', getEquipementsByDepartment);
-
-// Nouvelles routes pour filtrer par statut, type et marque
-router.get('/status/:statut', getEquipementsByStatus); // Pour filtrer par statut
-router.get('/type/:type', getEquipementsByType);       // Pour filtrer par type
-router.get('/marque/:marque', getEquipementsByBrand);  // Pour filtrer par marque
 
 export default router;

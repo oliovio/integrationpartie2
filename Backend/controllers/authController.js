@@ -1,85 +1,135 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { sequelize } from '../config/dataBase.js';
+import User from '../models/User.js';
+import { successResponse, errorResponse } from '../utils/responseFormatter.js';
+import logger from '../config/logger.js';
 
-class AuthController {
-  static async register(req, res) {
-    try {
-      const { nom, email, password, role } = req.body;
-
-      // Vérifier si l'utilisateur existe déjà
-      const [existingUsers] = await pool.query(
-        'SELECT * FROM utilisateurs WHERE email = ?',
-        [email]
-      );
-
-      if (existingUsers.length > 0) {
-        return res.status(400).json({ message: 'Cet email est déjà utilisé' });
-      }
-
-      // Hasher le mot de passe
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Insérer le nouvel utilisateur
-      const [result] = await pool.query(
-        'INSERT INTO utilisateurs (nom, email, password, role) VALUES (?, ?, ?, ?)',
-        [nom, email, hashedPassword, role]
-      );
-
-      res.status(201).json({
-        message: 'Utilisateur créé avec succès',
-        userId: result.insertId
-      });
-    } catch (error) {
-      console.error('Erreur lors de l\'inscription:', error);
-      res.status(500).json({ message: 'Erreur lors de l\'inscription' });
-    }
-  }
-
-  static async login(req, res) {
-    try {
-      const { email, password } = req.body;
-
-      // Rechercher l'utilisateur
-      const [users] = await pool.query(
-        'SELECT * FROM utilisateurs WHERE email = ?',
-        [email]
-      );
-
-      if (users.length === 0) {
-        return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
-      }
-
-      const user = users[0];
-
-      // Vérifier le mot de passe
-      const validPassword = await bcrypt.compare(password, user.password);
-      if (!validPassword) {
-        return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
-      }
-
-      // Générer le token JWT
-      const token = jwt.sign(
-        { userId: user.id, role: user.role },
+// Génération du token JWT
+const generateToken = (user) => {
+    return jwt.sign(
+        { id: user.id_utilisateur, email: user.email, role: user.id_role },
         process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN }
-      );
+        { expiresIn: process.env.JWT_EXPIRATION }
+    );
+};
 
-      res.json({
-        message: 'Connexion réussie',
-        token,
-        user: {
-          id: user.id,
-          nom: user.nom,
-          email: user.email,
-          role: user.role
-        }
-      });
+// Inscription
+export const register = async (req, res, next) => {
+    try {
+        const { mot_de_passe, ...userData } = req.body;
+
+        // Hash du mot de passe
+        const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
+
+        // Création de l'utilisateur
+        const user = await User.create({
+            ...userData,
+            mot_de_passe: hashedPassword
+        });
+
+        // Génération du token
+        const token = generateToken(user);
+
+        const response = successResponse('Inscription réussie', {
+            user: {
+                id: user.id_utilisateur,
+                nom: user.nom,
+                prenom: user.prenom,
+                email: user.email
+            },
+            token
+        }, 201);
+
+        logger.info(`Nouvel utilisateur créé: ${user.email}`);
+        res.status(response.statusCode).json(response.body);
     } catch (error) {
-      console.error('Erreur lors de la connexion:', error);
-      res.status(500).json({ message: 'Erreur lors de la connexion' });
+        next(error);
     }
-  }
-}
+};
 
-export default AuthController;
+// Connexion
+export const login = async (req, res, next) => {
+    try {
+        const { email, mot_de_passe } = req.body;
+
+        // Recherche de l'utilisateur
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            const response = errorResponse('Email ou mot de passe incorrect', null, 401);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        // Vérification du mot de passe
+        const validPassword = await bcrypt.compare(mot_de_passe, user.mot_de_passe);
+        if (!validPassword) {
+            const response = errorResponse('Email ou mot de passe incorrect', null, 401);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        // Vérification si l'utilisateur est actif
+        if (!user.actif) {
+            const response = errorResponse('Compte désactivé', null, 401);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        // Mise à jour de la dernière connexion
+        await user.update({ derniere_connexion: new Date() });
+
+        // Génération du token
+        const token = generateToken(user);
+
+        const response = successResponse('Connexion réussie', {
+            user: {
+                id: user.id_utilisateur,
+                nom: user.nom,
+                prenom: user.prenom,
+                email: user.email,
+                role: user.id_role
+            },
+            token
+        });
+
+        logger.info(`Connexion réussie: ${user.email}`);
+        res.status(response.statusCode).json(response.body);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Déconnexion
+export const logout = async (req, res) => {
+    const response = successResponse('Déconnexion réussie');
+    res.status(response.statusCode).json(response.body);
+};
+
+// Rafraîchissement du token
+export const refreshToken = async (req, res, next) => {
+    try {
+        const { token } = req.body;
+        if (!token) {
+            const response = errorResponse('Token requis', null, 400);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        // Vérification du token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findByPk(decoded.id);
+
+        if (!user || !user.actif) {
+            const response = errorResponse('Utilisateur non trouvé ou inactif', null, 401);
+            return res.status(response.statusCode).json(response.body);
+        }
+
+        // Génération d'un nouveau token
+        const newToken = generateToken(user);
+
+        const response = successResponse('Token rafraîchi avec succès', { token: newToken });
+        res.status(response.statusCode).json(response.body);
+    } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            const response = errorResponse('Token expiré', null, 401);
+            return res.status(response.statusCode).json(response.body);
+        }
+        next(error);
+    }
+};
