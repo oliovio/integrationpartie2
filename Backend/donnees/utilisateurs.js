@@ -4,7 +4,7 @@ export const utilisateurs = [
         "nom": "Dubois",
         "prenom": "Marie",
         "email": "marie.dubois@entreprise.com",
-        "mot_de_passe": "$2b$10$vJQDDt3WmVwuEGUDX00x4OzqxG3p6N0ZzLU0A7uGZQA2Kmr0zM1.q", // Admin123!
+        "mot_de_passe": "Admin123!", // Admin123!
         "role": "Administrateur",
         "departement": "IT",
         "telephone": "514-555-0001",
@@ -16,7 +16,7 @@ export const utilisateurs = [
         "nom": "Martin",
         "prenom": "Paul",
         "email": "paul.martin@entreprise.com",
-        "mot_de_passe": "$2b$10$Rp4Px7JXD1jqR3Sy1jYhz.TqwqE9z3zXxw5j5D5X5D5j5D5j5D5j", // Gestionnaire123!
+        "mot_de_passe": "Gestionnaire123!", // Gestionnaire123!
         "role": "Gestionnaire",
         "departement": "Support",
         "telephone": "514-555-0002",
@@ -28,7 +28,7 @@ export const utilisateurs = [
         "nom": "Lambert",
         "prenom": "Sophie",
         "email": "sophie.lambert@entreprise.com",
-        "mot_de_passe": "$2b$10$Rp4Px7JXD1jqR3Sy1jYhz.TqwqE9z3zXxw5j5D5X5D5j5D5j5D5j", // Tech123!
+        "mot_de_passe": "Tech123!", // Tech123!
         "role": "Technicien",
         "departement": "Maintenance",
         "telephone": "514-555-0003",
@@ -40,7 +40,7 @@ export const utilisateurs = [
         "nom": "Bernard",
         "prenom": "Thomas",
         "email": "thomas.bernard@entreprise.com",
-        "mot_de_passe": "$2b$10$Rp4Px7JXD1jqR3Sy1jYhz.TqwqE9z3zXxw5j5D5X5D5j5D5j5D5j", // Reseau123!
+        "mot_de_passe": " Reseau123!", // Reseau123!
         "role": "Technicien",
         "departement": "Réseau",
         "telephone": "514-555-0004",
@@ -52,7 +52,7 @@ export const utilisateurs = [
         "nom": "Moreau",
         "prenom": "Julie",
         "email": "julie.moreau@entreprise.com",
-        "mot_de_passe": "$2b$10$Rp4Px7JXD1jqR3Sy1jYhz.TqwqE9z3zXxw5j5D5X5D5j5D5j5D5j", // Support123!
+        "mot_de_passe": "Support123!", // Support123!
         "role": "Support",
         "departement": "Support",
         "telephone": "514-555-0005",
@@ -64,7 +64,7 @@ export const utilisateurs = [
         "nom": "Petit",
         "prenom": "Marc",
         "email": "marc.petit@entreprise.com",
-        "mot_de_passe": "$2b$10$Rp4Px7JXD1jqR3Sy1jYhz.TqwqE9z3zXxw5j5D5X5D5j5D5j5D5j", // Log123!
+        "mot_de_passe": " Log123!", // Log123!
         "role": "Gestionnaire",
         "departement": "Logiciels",
         "telephone": "514-555-0006",
