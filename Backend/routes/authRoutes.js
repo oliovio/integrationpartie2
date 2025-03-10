@@ -26,33 +26,24 @@ const loginValidation = [
 
 // Routes
 router.post('/register', registerValidation, validateRequest, async (req, res) => {
-    // Cette route n'est pas définie dans la mise à jour, elle est donc laissée vide
-    // Vous pouvez ajouter la logique de register ici
+    // Logic for user registration
 });
 
 router.post('/login', loginValidation, validateRequest, async (req, res) => {
     try {
         const { email, mot_de_passe } = req.body;
 
-        // Recherche de l'utilisateur
         const user = await User.findOne({ where: { email } });
         if (!user) {
-            return res.status(401).json({
-                success: false,
-                message: "Email ou mot de passe incorrect"
-            });
+            return res.status(401).json({ success: false, message: "Email ou mot de passe incorrect" });
         }
 
-        // Vérification du mot de passe
         const validPassword = await bcrypt.compare(mot_de_passe, user.mot_de_passe);
         if (!validPassword) {
-            return res.status(401).json({
-                success: false,
-                message: "Email ou mot de passe incorrect"
-            });
+            return res.status(401).json({ success: false, message: "Email ou mot de passe incorrect" });
         }
 
-        // Génération du token JWT
+        // Generate JWT token
         const token = jwt.sign(
             { 
                 id: user.id,
@@ -79,10 +70,7 @@ router.post('/login', loginValidation, validateRequest, async (req, res) => {
 
     } catch (error) {
         console.error('Erreur lors de la connexion:', error);
-        res.status(500).json({
-            success: false,
-            message: "Erreur lors de la connexion"
-        });
+        res.status(500).json({ success: false, message: "Erreur du serveur" });
     }
 });
 

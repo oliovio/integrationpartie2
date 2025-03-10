@@ -4,7 +4,6 @@ import userRoutes from './userRoutes.js';
 import equipementRoutes from './equipementRoutes.js';
 import departmentRoutes from './departmentRoutes.js';
 import maintenanceRoutes from './maintenanceRoutes.js';
-import roleRoutes from '../app/api/roles/route.js';
 
 const router = express.Router();
 
@@ -15,7 +14,7 @@ router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 
 // Routes équipements
-router.use('/equipements', equipementRoutes);
+router.use('/equipment', equipementRoutes);
 
 // Routes départements
 router.use('/departments', departmentRoutes);
@@ -24,6 +23,7 @@ router.use('/departments', departmentRoutes);
 router.use('/maintenance', maintenanceRoutes);
 
 // Routes rôles
-router.use('/roles', roleRoutes);
+// Removed roleRoutes as it is not referenced in the frontend
+// router.use('/roles', roleRoutes);
 
 export default router;

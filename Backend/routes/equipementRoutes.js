@@ -24,10 +24,10 @@ const equipementValidation = [
 // Routes
 router.use(authenticate); // Protection de toutes les routes équipements
 
-router.get('/', getEquipements);
-router.get('/:id', getEquipementById);
-router.post('/', equipementValidation, validateRequest, createEquipement);
-router.put('/:id', equipementValidation, validateRequest, updateEquipement);
-router.delete('/:id', deleteEquipement);
+router.get('/equipements', getEquipements);
+router.get('/equipements/:id', getEquipementById);
+router.post('/equipements', equipementValidation, validateRequest, createEquipement);
+router.put('/equipements/:id', equipementValidation, validateRequest, updateEquipement);
+router.delete('/equipements/:id', deleteEquipement);
 
 export default router;
