@@ -1,5 +1,8 @@
 <template>
   <div class="bg-white">
+    <!-- Navigation -->
+    <Navigation />
+
     <!-- Header -->
     <div class="relative isolate overflow-hidden bg-gradient-to-b from-blue-100/20">
       <div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-40">
@@ -101,6 +104,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import Navigation from '../components/Navigation.vue';
 
 const form = ref({
   name: '',

@@ -1,19 +1,19 @@
 <script setup>
 const reviews = [
   {
-    id: 1,
-    content: "This IT equipment management system has transformed how we handle our assets. The tracking and maintenance features are invaluable.",
-    author: "Sarah Johnson",
-    role: "IT Director",
-    company: "Tech Solutions Inc.",
+    id: 2,
+    content: "Ce système de gestion de l'équipement à changé la gestion de notre entreprise. Les systèmes de suivie et de maintenance offre une aide précieuse à notre équipe.",
+    author: "Micheal Afton",
+    role: "Propriétaire / Gestionnaire en chef",
+    company: "Fazbear Entertainement LLC.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
   },
   {
-    id: 2,
+    id: 1,
     content: "The dashboard provides clear insights into our equipment status. It's helped us optimize our resource allocation significantly.",
-    author: "Michael Chen",
-    role: "Operations Manager",
+    author: "Michel Troo",
+    role: "Gestionnaire des Opérations",
     company: "Global Systems Ltd.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -24,7 +24,7 @@ const reviews = [
     author: "Emily Rodriguez",
     role: "IT Infrastructure Lead",
     company: "Innovative Corp",
-    rating: 5,
+    rating: 4.5,
     image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
   }
 ];
@@ -35,10 +35,10 @@ const reviews = [
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Trusted by Industry Leaders
+          Recconue par les Leader de l'industrie
         </h2>
         <p class="mt-4 text-lg leading-8 text-gray-600">
-          See what our clients say about their experience with our IT equipment management solution.
+          Voici ce que les clients de CortexIT ont à dire sur notre système de gestion d'équipement IT.
         </p>
       </div>
       <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">

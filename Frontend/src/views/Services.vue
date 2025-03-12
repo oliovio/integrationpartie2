@@ -1,5 +1,7 @@
 <template>
   <div class="bg-white">
+    <!-- Navigation -->
+    <Navigation />
     <!-- Hero section -->
     <div class="relative isolate overflow-hidden bg-gradient-to-b from-blue-100/20">
       <div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-40">
@@ -66,6 +68,7 @@
 </template>
 
 <script setup>
+import Navigation from '../components/Navigation.vue';
 import { CheckIcon } from '@heroicons/vue/24/outline';
 
 const services = [

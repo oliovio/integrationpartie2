@@ -1,5 +1,7 @@
 <template>
   <div class="bg-white">
+    <!-- Navigation -->
+    <Navigation />
     <!-- Header -->
     <div class="mx-auto max-w-7xl px-6 pt-24 pb-8 sm:pt-32 lg:px-8">
       <div class="mx-auto max-w-4xl text-center">
@@ -145,6 +147,7 @@
 
 <script setup>
 import { CheckIcon } from '@heroicons/vue/24/outline';
+import Navigation from '../components/Navigation.vue';
 
 const faqs = [
   {

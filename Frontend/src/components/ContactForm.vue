@@ -49,10 +49,10 @@ const handleSubmit = async () => {
           <div class="relative">
             <div class="sm:text-center">
               <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Get in Touch
+                Contactez nous
               </h2>
               <p class="mx-auto mt-6 max-w-2xl text-lg text-blue-100">
-                Have questions about our IT equipment management solution? We're here to help!
+                Vous avez des questions quant à nos services? Envoyez la nous et nous vous réponderonts sous peu!
               </p>
             </div>
             
