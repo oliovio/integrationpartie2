@@ -20,7 +20,11 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
       <div class="mx-auto max-w-2xl lg:max-w-none">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div v-for="service in services" :key="service.name" class="relative isolate flex flex-col justify-between rounded-2xl bg-white shadow-xl ring-1 ring-gray-200 p-8">
+          <div 
+            v-for="(service, index) in services" 
+            :key="service.name" 
+            class="relative isolate flex flex-col justify-between rounded-2xl bg-white shadow-xl ring-1 ring-gray-200 p-8"
+          >
             <div>
               <div class="flex items-center gap-x-4">
                 <component :is="service.icon" class="h-8 w-8 flex-none text-blue-600" />
@@ -34,9 +38,19 @@
                 </li>
               </ul>
             </div>
-            <a :href="service.href" class="mt-8 text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
-              Learn more <span aria-hidden="true">→</span>
-            </a>
+
+            <!-- Learn More Button -->
+            <button 
+              @click="toggleDetails(index)" 
+              class="mt-8 text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500"
+            >
+              {{ expandedIndex === index ? 'Show less' : 'Learn more' }} <span aria-hidden="true">→</span>
+            </button>
+
+            <!-- Hidden Details Section -->
+            <div v-if="expandedIndex === index" class="mt-4 text-sm text-gray-700 leading-7">
+              <p>{{ service.details }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -68,45 +82,55 @@
 </template>
 
 <script setup>
-import Navigation from '../components/Navigation.vue';
-import { CheckIcon } from '@heroicons/vue/24/outline';
+import { ref } from "vue";
+import Navigation from "../components/Navigation.vue";
+import { CheckIcon } from "@heroicons/vue/24/outline";
 
+// Track which service details are expanded
+const expandedIndex = ref(null);
+
+// Function to toggle details
+const toggleDetails = (index) => {
+  expandedIndex.value = expandedIndex.value === index ? null : index;
+};
+
+// Services list
 const services = [
   {
-    name: 'Asset Tracking',
-    description: 'Comprehensive tracking of all IT equipment across your organization.',
+    name: "Asset Tracking",
+    description: "Comprehensive tracking of all IT equipment across your organization.",
     icon: CheckIcon,
-    href: '#',
     features: [
-      'Real-time asset location tracking',
-      'Detailed equipment history',
-      'Automated inventory updates',
-      'Custom reporting tools'
-    ]
+      "Real-time asset location tracking",
+      "Detailed equipment history",
+      "Automated inventory updates",
+      "Custom reporting tools"
+    ],
+    details: "Our asset tracking solution helps organizations monitor IT equipment in real-time, ensuring accountability and efficiency. Our system provides historical data, generates reports, and prevents loss by automating inventory updates."
   },
   {
-    name: 'Maintenance Management',
-    description: 'Proactive maintenance scheduling and tracking system.',
+    name: "Maintenance Management",
+    description: "Proactive maintenance scheduling and tracking system.",
     icon: CheckIcon,
-    href: '#',
     features: [
-      'Preventive maintenance scheduling',
-      'Service history tracking',
-      'Vendor management',
-      'Maintenance cost analysis'
-    ]
+      "Preventive maintenance scheduling",
+      "Service history tracking",
+      "Vendor management",
+      "Maintenance cost analysis"
+    ],
+    details: "Our maintenance management software ensures that IT equipment remains in optimal condition. It automates scheduling, logs service history, and manages maintenance costs to maximize uptime and minimize expenses."
   },
   {
-    name: 'Analytics & Reporting',
-    description: 'Advanced analytics and customizable reporting solutions.',
+    name: "Analytics & Reporting",
+    description: "Advanced analytics and customizable reporting solutions.",
     icon: CheckIcon,
-    href: '#',
     features: [
-      'Custom report generation',
-      'Performance analytics',
-      'Cost optimization insights',
-      'Trend analysis'
-    ]
+      "Custom report generation",
+      "Performance analytics",
+      "Cost optimization insights",
+      "Trend analysis"
+    ],
+    details: "Our analytics & reporting tools provide in-depth insights into IT operations. Organizations can generate custom reports, analyze trends, and optimize IT-related costs for better decision-making."
   }
 ];
 </script>
