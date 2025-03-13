@@ -20,7 +20,11 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
       <div class="mx-auto max-w-2xl lg:max-w-none">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div v-for="service in services" :key="service.name" class="relative isolate flex flex-col justify-between rounded-2xl bg-white shadow-xl ring-1 ring-gray-200 p-8">
+          <div 
+            v-for="(service, index) in services" 
+            :key="service.name" 
+            class="relative isolate flex flex-col justify-between rounded-2xl bg-white shadow-xl ring-1 ring-gray-200 p-8"
+          >
             <div>
               <div class="flex items-center gap-x-4">
                 <component :is="service.icon" class="h-8 w-8 flex-none text-blue-600" />
@@ -34,9 +38,19 @@
                 </li>
               </ul>
             </div>
-            <a :href="service.href" class="mt-8 text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
-              En savoir plus <span aria-hidden="true">→</span>
-            </a>
+
+            <!-- Learn More Button -->
+            <button 
+              @click="toggleDetails(index)" 
+              class="mt-8 text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500"
+            >
+              {{ expandedIndex === index ? 'Show less' : 'En savoir plus' }} <span aria-hidden="true">→</span>
+            </button>
+
+            <!-- Hidden Details Section -->
+            <div v-if="expandedIndex === index" class="mt-4 text-sm text-gray-700 leading-7">
+              <p>{{ service.details }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -68,15 +82,24 @@
 </template>
 
 <script setup>
-import Navigation from '../components/Navigation.vue';
-import { CheckIcon } from '@heroicons/vue/24/outline';
+import { ref } from "vue";
+import Navigation from "../components/Navigation.vue";
+import { CheckIcon } from "@heroicons/vue/24/outline";
 
+// Track which service details are expanded
+const expandedIndex = ref(null);
+
+// Function to toggle details
+const toggleDetails = (index) => {
+  expandedIndex.value = expandedIndex.value === index ? null : index;
+};
+
+// Services list
 const services = [
   {
     name: 'Suivi des actifs',
     description: 'Un suivi compréhensif de tous les équipements IT de votre organisation.',
     icon: CheckIcon,
-    href: '#',
     features: [
       'Tracking en temps réel des équipements',
       'Historique détaillé de chaque équipement',
@@ -88,7 +111,6 @@ const services = [
     name: 'Gestion de la Maintenance',
     description: 'Un système de gestion proactive de la maintenance.',
     icon: CheckIcon,
-    href: '#',
     features: [
       'Planification préventive de maintenance',
       'Historique détaillé des réparations',
@@ -99,7 +121,6 @@ const services = [
     name: 'Analytiques & Rapports',
     description: 'Analyses avancées et rapports adapté à vos besoins.',
     icon: CheckIcon,
-    href: '#',
     features: [
       'Generation de rapports personalisés',
       'Analyses des performances',
