@@ -8,10 +8,10 @@
       <div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-40">
         <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
           <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Contact Us
+            Contactez nous
           </h1>
           <p class="mt-6 text-lg leading-8 text-gray-600">
-            Get in touch with our team for any questions about our IT equipment management solutions.
+            Prenez contact avec notre équipe pour quelconque question concernant nos services.
           </p>
         </div>
       </div>
@@ -21,9 +21,9 @@
       <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <div class="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
           <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900">Prenez contact avec nous</h2>
             <p class="mt-6 text-lg leading-8 text-gray-600">
-              Have questions about our IT equipment management solutions? We're here to help! Fill out the form and our team will get back to you shortly.
+              Vous avez des questions quant à nos services? Envoyez nous la au travers du formulaire ci dessou et nous vous réponderonts sous peu.
             </p>
           </div>
         </div>
@@ -31,21 +31,21 @@
           <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div class="sm:col-span-2">
-                <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Name</label>
+                <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Nom</label>
                 <div class="mt-2.5">
                   <input
                     v-model="form.name"
                     type="text"
-                    name="name"
+                    name="nom"
                     id="name"
-                    autocomplete="name"
+                    autocomplete="nom"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                   />
                   <p v-if="form.errors.name" class="text-red-500 text-xs mt-1">{{ form.errors.name }}</p>
                 </div>
               </div>
               <div class="sm:col-span-2">
-                <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+                <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Addresse Email</label>
                 <div class="mt-2.5">
                   <input
                     v-model="form.email"
@@ -59,14 +59,14 @@
                 </div>
               </div>
               <div class="sm:col-span-2">
-                <label for="phone" class="block text-sm font-semibold leading-6 text-gray-900">Phone number</label>
+                <label for="phone" class="block text-sm font-semibold leading-6 text-gray-900">Numéro de téléphone</label>
                 <div class="mt-2.5">
                   <input
                     v-model="form.phone"
                     type="tel"
                     name="phone"
                     id="phone"
-                    autocomplete="tel"
+                    autocomplete="Telephone"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                   />
                   <p v-if="form.errors.phone" class="text-red-500 text-xs mt-1">{{ form.errors.phone }}</p>

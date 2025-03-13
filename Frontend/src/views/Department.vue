@@ -62,7 +62,7 @@ const openDetailsModal = (department) => {
 <template>
   <div class="p-6">
     <div class="mb-6 space-y-4">
-      <h1 class="text-2xl font-bold text-gray-900">Department Management</h1>
+      <h1 class="text-2xl font-bold text-gray-900">Gestionnaire des départements</h1>
       
       <div class="flex space-x-4">
         <!-- Add Department Button -->

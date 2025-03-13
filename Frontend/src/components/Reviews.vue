@@ -7,25 +7,25 @@ const reviews = [
     role: "Propriétaire / Gestionnaire en chef",
     company: "Fazbear Entertainement LLC.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    image: "https://www.pearlanddean.com/wp-content/uploads/2025/01/uuiddaef48c6-a2ca-4abb-aa2e-ca357af7dd12groupId10139t1738321880754.jpg"
   },
   {
     id: 1,
-    content: "The dashboard provides clear insights into our equipment status. It's helped us optimize our resource allocation significantly.",
+    content: "Le dashboard donne une idée claire du status de enos équipement. C'est une grande optimisation de nos ressources.",
     author: "Michel Troo",
     role: "Gestionnaire des Opérations",
-    company: "Global Systems Ltd.",
+    company: "Type Acier Ltd.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    image: "https://www.geek-days.com/wp-content/uploads/2022/09/Fildrong-500x500-1.jpg"
   },
   {
     id: 3,
-    content: "Maintenance scheduling has never been easier. We've reduced equipment downtime by 40% since implementing this system.",
-    author: "Emily Rodriguez",
-    role: "IT Infrastructure Lead",
-    company: "Innovative Corp",
+    content: "Le suivi de notre horaire est maintenant plus facile que jamais. Ce système nous a permit de réduire de 40% le temps d'inopérabilité de nos équipements.",
+    author: "Matthew Patthew",
+    role: "Leader IT",
+    company: "JustaTheory LLC",
     rating: 4,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    image: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/22378734/MatPat_headshot.jpg?quality=90&strip=all&crop=21.875%2C0%2C56.25%2C100&w=2400"
   }
 ];
 </script>

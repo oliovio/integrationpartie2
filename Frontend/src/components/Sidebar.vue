@@ -5,7 +5,7 @@
       <div class="flex items-center px-6 py-4 border-b border-gray-200">
         <router-link to="/" class="flex items-center space-x-2">
           <ComputerDesktopIcon class="h-8 w-8 text-blue-600" />
-          <span class="text-xl font-semibold text-gray-900">IT Manager</span>
+          <span class="text-xl font-semibold text-gray-900">CortexIT</span>
         </router-link>
       </div>
 

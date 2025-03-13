@@ -10,21 +10,21 @@
           <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
             <div class="sm:text-center lg:text-left">
               <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span class="block">Manage your IT</span>
-                <span class="block text-blue-600">equipment with confidence</span>
+                <span class="block">Gérer vos équipements IT</span>
+                <span class="block text-blue-600">avec confiance</span>
               </h1>
               <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Streamline your organization's IT asset management with our comprehensive tracking and maintenance solution.
+                Organiser les actifs IT de votre organisation grâce à nos suivis compréhensifs et notre gestionnaire de maintenance.
               </p>
               <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div class="rounded-md shadow">
                   <router-link to="/get-started" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
-                    Get started
+                    Débuter
                   </router-link>
                 </div>
                 <div class="mt-3 sm:mt-0 sm:ml-3">
                   <router-link to="/learn-more" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10">
-                    Learn more →
+                    En savoir plus →
                   </router-link>
                 </div>
               </div>
@@ -41,10 +41,10 @@
     <div class="py-24 bg-white sm:py-32">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-          <h2 class="text-base font-semibold leading-7 text-blue-600">Comprehensive Solution</h2>
-          <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything you need to manage IT assets</p>
+          <h2 class="text-base font-semibold leading-7 text-blue-600">Une solution compréhensive</h2>
+          <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Tout ce qu'il vous faut pour Gérer vos équipements IT</p>
           <p class="mt-6 text-lg leading-8 text-gray-600">
-            Our platform provides all the tools you need to track, maintain, and optimize your IT equipment.
+            Notre plateforme vous offre tous les outils d'ont vous avez besoin pour suivre et optimiser la gestion de vous équipements IT.
           </p>
         </div>
 
@@ -72,9 +72,9 @@
       
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Premium Services</h2>
+          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Services Premium</h2>
           <p class="mt-6 text-lg leading-8 text-gray-300">
-            Experience top-tier IT equipment management with our premium features and dedicated support.
+            Faites l'expérience du gestionnaire avancée et du support dédié 24h/24 de note plan professionel.
           </p>
         </div>
         
@@ -121,45 +121,45 @@ import Footer from '../components/Footer.vue';
 
 const features = [
   {
-    title: 'Equipment Tracking',
-    description: 'Track and manage all your IT assets in one place',
+    title: 'Suivi des Équipements',
+    description: 'Suivez et gérez vos équipements IT en un seul endroit',
     icon: ComputerDesktopIcon,
   },
   {
-    title: 'Maintenance Management',
-    description: 'Schedule and monitor equipment maintenance',
+    title: 'Gestion de la Maintenance',
+    description: 'Planifiez et surveillez la maintenance de vos équipements',
     icon: WrenchScrewdriverIcon,
   },
   {
-    title: 'Analytics & Reports',
-    description: 'Get insights with detailed analytics and reports',
+    title: 'Analytiques & Rapports',
+    description: 'Soyez informé grâce à nos analyses et rapports détaillés',
     icon: ChartBarIcon,
   },
 ];
 
 const services = [
   {
-    name: 'Real-time Monitoring',
-    description: 'Monitor your IT equipment performance and status in real-time',
+    name: 'Surveillance en temps réel',
+    description: 'Surveillez le statut et la performance de vos équipements en temps réel',
     icon: ClockIcon,
   },
   {
-    name: 'Cloud Storage',
-    description: 'Secure cloud storage for all your equipment data and documentation',
+    name: 'Stockage sur le cloud',
+    description: 'Stockage sur un Cloud sécurisé de toutes les données et documents relatives à vos équipements',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'Advanced Security',
-    description: 'Enterprise-grade security to protect your sensitive data',
+    name: 'Sécurité Avancée',
+    description: 'Sécurité de haute qualité pour protéger vos données sensibles',
     icon: LockClosedIcon,
   },
   {
-    name: 'Server Management',
-    description: 'Comprehensive server monitoring and management tools',
+    name: 'Gestion du serveur',
+    description: 'Surveillez de près le serveur et les outils de gestions',
     icon: ServerIcon,
   },
   {
-    name: '24/7 Support',
+    name: 'Support 24h/24 et 7 jours/semaine',
     description: 'Round-the-clock technical support from our expert team',
     icon: ChatBubbleLeftRightIcon,
   },
@@ -167,48 +167,41 @@ const services = [
 
 const plans = [
   {
-    name: 'Starter',
+    name: 'Plan de base',
     price: 29,
     period: '/month',
-    description: 'Perfect for small businesses',
+    description: 'Parfait pour les petites équipes',
     features: [
-      'Up to 50 equipment items',
-      'Basic analytics',
-      'Email support',
-      'Mobile app access',
-      '5GB storage',
+      'Jusqu\'a 50 actifs',
+      'Analyses de base',
+      'Support par Email',
+      'Accès par application mobile',
+      '5GB de stockage',
     ],
   },
   {
-    name: 'Professional',
+    name: 'Professionel',
     price: 79,
     period: '/month',
-    description: 'Best for growing companies',
+    description: 'Pour les compagnies grandissantes',
     features: [
-      'Up to 200 equipment items',
-      'Advanced analytics',
-      'Priority support',
-      'Mobile app access',
-      '25GB storage',
-      'API access',
-      'Custom reports',
+      'Jusqu\'a 200 actifs',
+      'Analyses avancées',
+      'Support prioritaire',
+      'Accès par application mobile',
+      '25GB de stockage',
+      'aAccès aux API',
+      'Rapports personalisables',
     ],
     popular: true,
   },
   {
-    name: 'Enterprise',
-    price: 199,
-    period: '/month',
-    description: 'For large organizations',
+    name: 'Créer votre propre plan',
+    price: "",
+    period: '',
+    description: 'Créer un plan personalisé qui convient à vos besoins',
     features: [
-      'Unlimited equipment items',
-      'Custom analytics',
-      '24/7 phone support',
-      'Mobile app access',
-      'Unlimited storage',
-      'API access',
-      'Custom reports',
-      'Dedicated account manager',
+      '',
     ],
   },
 ];

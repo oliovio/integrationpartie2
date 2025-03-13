@@ -22,7 +22,7 @@ onMounted(() => {
 <template>
   <div v-if="equipment" class="p-6">
     <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold">Equipment Details</h1>
+      <h1 class="text-2xl font-bold">Détails des Équipment</h1>
       <button
         @click="$router.push('/equipment')"
         class="text-gray-600 hover:text-gray-900"
@@ -38,11 +38,11 @@ onMounted(() => {
           <p class="text-lg font-medium">{{ equipment.type }}</p>
         </div>
         <div>
-          <h3 class="text-gray-500 text-sm">Model</h3>
+          <h3 class="text-gray-500 text-sm">Modèle</h3>
           <p class="text-lg font-medium">{{ equipment.model }}</p>
         </div>
         <div>
-          <h3 class="text-gray-500 text-sm">Serial Number</h3>
+          <h3 class="text-gray-500 text-sm">Numéro de série</h3>
           <p class="text-lg font-medium">{{ equipment.serialNumber }}</p>
         </div>
         <div>
@@ -59,29 +59,29 @@ onMounted(() => {
           </p>
         </div>
         <div>
-          <h3 class="text-gray-500 text-sm">Assigned To</h3>
+          <h3 class="text-gray-500 text-sm">Assigné à</h3>
           <p class="text-lg font-medium">{{ equipment.assignedTo }}</p>
         </div>
         <div>
-          <h3 class="text-gray-500 text-sm">Department</h3>
+          <h3 class="text-gray-500 text-sm">Départment</h3>
           <p class="text-lg font-medium">{{ equipment.department }}</p>
         </div>
         <div>
-          <h3 class="text-gray-500 text-sm">Purchase Date</h3>
+          <h3 class="text-gray-500 text-sm">Date d'achat</h3>
           <p class="text-lg font-medium">{{ format(new Date(equipment.purchaseDate), 'PP') }}</p>
         </div>
         <div>
-          <h3 class="text-gray-500 text-sm">Last Maintenance</h3>
+          <h3 class="text-gray-500 text-sm">Dernière maintenance</h3>
           <p class="text-lg font-medium">{{ format(new Date(equipment.lastMaintenance), 'PP') }}</p>
         </div>
       </div>
 
       <div class="mt-8 flex space-x-4">
         <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-          Edit Equipment
+          Modifier l'équipement
         </button>
         <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-          Delete Equipment
+          Supprimer l'équipement
         </button>
       </div>
     </div>

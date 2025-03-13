@@ -103,15 +103,15 @@ onMounted(() => {
   <div class="p-8 bg-gray-50 min-h-screen">
     <div class="mb-8 flex justify-between items-center">
       <div>
-        <h1 class="text-3xl font-bold text-gray-900">Welcome Back</h1>
-        <p class="text-gray-500 mt-2">Here's what's happening with your equipment today.</p>
+        <h1 class="text-3xl font-bold text-gray-900">Rebonjour</h1>
+      <p class="text-gray-500 mt-2">Voici ce qui se passe avec vos équipements aujourd'hui</p>
       </div>
       <button 
         @click="handleLogout" 
         class="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
       >
         <ArrowRightOnRectangleIcon class="h-5 w-5 mr-2" />
-        Logout
+        Se déconnecter
       </button>
     </div>
 
@@ -123,7 +123,7 @@ onMounted(() => {
             <ComputerDesktopIcon class="h-6 w-6 text-blue-600" />
           </div>
           <div class="ml-4">
-            <h3 class="text-sm font-medium text-gray-500">Total Equipment</h3>
+            <h3 class="text-sm font-medium text-gray-500">Total des Équipment</h3>
             <p class="text-2xl font-semibold text-gray-900">{{ statistics.total }}</p>
           </div>
         </div>
@@ -135,7 +135,7 @@ onMounted(() => {
             <CheckCircleIcon class="h-6 w-6 text-green-600" />
           </div>
           <div class="ml-4">
-            <h3 class="text-sm font-medium text-gray-500">In Use</h3>
+            <h3 class="text-sm font-medium text-gray-500">En cours d'utilisation</h3>
             <p class="text-2xl font-semibold text-gray-900">{{ statistics.inUse }}</p>
           </div>
         </div>
@@ -147,7 +147,7 @@ onMounted(() => {
             <WrenchScrewdriverIcon class="h-6 w-6 text-yellow-600" />
           </div>
           <div class="ml-4">
-            <h3 class="text-sm font-medium text-gray-500">In Maintenance</h3>
+            <h3 class="text-sm font-medium text-gray-500">En Maintenance</h3>
             <p class="text-2xl font-semibold text-gray-900">{{ statistics.maintenance }}</p>
           </div>
         </div>
@@ -159,7 +159,7 @@ onMounted(() => {
             <ExclamationCircleIcon class="h-6 w-6 text-purple-600" />
           </div>
           <div class="ml-4">
-            <h3 class="text-sm font-medium text-gray-500">Available</h3>
+            <h3 class="text-sm font-medium text-gray-500">Disponible</h3>
             <p class="text-2xl font-semibold text-gray-900">{{ statistics.available }}</p>
           </div>
         </div>
@@ -170,7 +170,7 @@ onMounted(() => {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Equipment Distribution Chart -->
       <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 lg:col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Equipment Distribution</h3>
+        <h3 class="text-lg font-semibold mb-4">Distribution d'Équipment</h3>
         <div class="relative h-64">
           <Doughnut :data="chartData" :options="chartOptions" />
         </div>
@@ -178,14 +178,14 @@ onMounted(() => {
 
       <!-- Department Overview -->
       <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 lg:col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Department Overview</h3>
+        <h3 class="text-lg font-semibold mb-4">Survol du département</h3>
         <div class="space-y-4">
           <div v-for="dept in departments" :key="dept.id" class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
             <div class="flex items-center">
               <BuildingOfficeIcon class="h-6 w-6 text-gray-400" />
               <div class="ml-3">
                 <h4 class="text-sm font-medium text-gray-900">{{ dept.name }}</h4>
-                <p class="text-sm text-gray-500">{{ dept.employeeCount }} employees</p>
+                <p class="text-sm text-gray-500">{{ dept.employeeCount }} employés</p>
               </div>
             </div>
             <div class="text-right">
@@ -198,7 +198,7 @@ onMounted(() => {
 
       <!-- Recent Activities -->
       <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 lg:col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Recent Activities</h3>
+        <h3 class="text-lg font-semibold mb-4">Activité récentes</h3>
         <div class="space-y-4">
           <div v-for="activity in recentActivities" :key="activity.id" class="flex items-start space-x-3">
             <div class="flex-shrink-0">

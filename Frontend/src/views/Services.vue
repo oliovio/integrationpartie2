@@ -7,10 +7,10 @@
       <div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-40">
         <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
           <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Our Services
+            Nos Services
           </h1>
           <p class="mt-6 text-lg leading-8 text-gray-600">
-            Comprehensive IT equipment management solutions tailored to your organization's needs.
+            Une solution de gestion d'équipement IT comprehensive et adaptée à vos besoins.
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@
               </ul>
             </div>
             <a :href="service.href" class="mt-8 text-sm font-semibold leading-6 text-blue-600 hover:text-blue-500">
-              Learn more <span aria-hidden="true">→</span>
+              En savoir plus <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -49,17 +49,17 @@
       </div>
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Ready to streamline your IT management?
+          Prêts à passer à un autre niveau de gestion IT?
         </h2>
         <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
-          Start managing your IT equipment more efficiently today with our comprehensive solution.
+          Commencez à gérer vos équipement IT aujourd'hui grâce à nos services.
         </p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
           <router-link to="/pricing" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-            View pricing
+            Voir nos prix
           </router-link>
           <router-link to="/contact" class="text-sm font-semibold leading-6 text-gray-900">
-            Contact sales <span aria-hidden="true">→</span>
+            Contactez nous <span aria-hidden="true">→</span>
           </router-link>
         </div>
       </div>
@@ -73,39 +73,38 @@ import { CheckIcon } from '@heroicons/vue/24/outline';
 
 const services = [
   {
-    name: 'Asset Tracking',
-    description: 'Comprehensive tracking of all IT equipment across your organization.',
+    name: 'Suivi des actifs',
+    description: 'Un suivi compréhensif de tous les équipements IT de votre organisation.',
     icon: CheckIcon,
     href: '#',
     features: [
-      'Real-time asset location tracking',
-      'Detailed equipment history',
-      'Automated inventory updates',
-      'Custom reporting tools'
+      'Tracking en temps réel des équipements',
+      'Historique détaillé de chaque équipement',
+      'Inventaire mis à jour automatiquement',
+      'Production de rapports personalisés'
     ]
   },
   {
-    name: 'Maintenance Management',
-    description: 'Proactive maintenance scheduling and tracking system.',
+    name: 'Gestion de la Maintenance',
+    description: 'Un système de gestion proactive de la maintenance.',
     icon: CheckIcon,
     href: '#',
     features: [
-      'Preventive maintenance scheduling',
-      'Service history tracking',
-      'Vendor management',
-      'Maintenance cost analysis'
+      'Planification préventive de maintenance',
+      'Historique détaillé des réparations',
+      'Analyse de gestion des coûts'
     ]
   },
   {
-    name: 'Analytics & Reporting',
-    description: 'Advanced analytics and customizable reporting solutions.',
+    name: 'Analytiques & Rapports',
+    description: 'Analyses avancées et rapports adapté à vos besoins.',
     icon: CheckIcon,
     href: '#',
     features: [
-      'Custom report generation',
-      'Performance analytics',
-      'Cost optimization insights',
-      'Trend analysis'
+      'Generation de rapports personalisés',
+      'Analyses des performances',
+      'Analyse d\'optimisation des coûts',
+      'Analyses des tendances'
     ]
   }
 ];

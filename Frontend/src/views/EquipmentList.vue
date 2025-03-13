@@ -110,10 +110,10 @@ const openDetailsModal = (equipment) => {
         <thead class="bg-gray-50">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Model</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Serial Number</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modèle</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Numéro de série</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned To</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigné à</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
@@ -166,7 +166,7 @@ const openDetailsModal = (equipment) => {
     <!-- Add Equipment Modal -->
     <div v-if="showAddModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div class="bg-white p-6 rounded-lg w-full max-w-md">
-        <h2 class="text-xl font-bold mb-4">Add New Equipment</h2>
+        <h2 class="text-xl font-bold mb-4">Ajouter un nouvel Équipment</h2>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Type</label>
@@ -177,7 +177,7 @@ const openDetailsModal = (equipment) => {
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Model</label>
+            <label class="block text-sm font-medium text-gray-700">Modèle</label>
             <input
               v-model="newEquipment.model"
               type="text"
@@ -185,7 +185,7 @@ const openDetailsModal = (equipment) => {
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Serial Number</label>
+            <label class="block text-sm font-medium text-gray-700">Numéro de série</label>
             <input
               v-model="newEquipment.serialNumber"
               type="text"
@@ -198,13 +198,13 @@ const openDetailsModal = (equipment) => {
               v-model="newEquipment.status"
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             >
-              <option>Available</option>
-              <option>In Use</option>
+              <option>Disponible</option>
+              <option>Utilisé</option>
               <option>Maintenance</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Assigned To</label>
+            <label class="block text-sm font-medium text-gray-700">Assigné à</label>
             <input
               v-model="newEquipment.assignedTo"
               type="text"
@@ -217,13 +217,13 @@ const openDetailsModal = (equipment) => {
             @click="showAddModal = false"
             class="px-4 py-2 border rounded-md hover:bg-gray-50"
           >
-            Cancel
+            Annuler
           </button>
           <button
             @click="addEquipment"
             class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
-            Add Equipment
+            Ajouter un Équipment
           </button>
         </div>
       </div>
@@ -232,7 +232,7 @@ const openDetailsModal = (equipment) => {
     <!-- Edit Equipment Modal -->
     <div v-if="showEditModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div class="bg-white p-6 rounded-lg w-full max-w-md">
-        <h2 class="text-xl font-bold mb-4">Edit Equipment</h2>
+        <h2 class="text-xl font-bold mb-4">Modifier l'Équipment</h2>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Type</label>
@@ -243,7 +243,7 @@ const openDetailsModal = (equipment) => {
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Model</label>
+            <label class="block text-sm font-medium text-gray-700">Modèle</label>
             <input
               v-model="selectedEquipment.model"
               type="text"
@@ -251,7 +251,7 @@ const openDetailsModal = (equipment) => {
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Serial Number</label>
+            <label class="block text-sm font-medium text-gray-700">Numéro de série</label>
             <input
               v-model="selectedEquipment.serialNumber"
               type="text"
@@ -264,13 +264,13 @@ const openDetailsModal = (equipment) => {
               v-model="selectedEquipment.status"
               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             >
-              <option>Available</option>
-              <option>In Use</option>
+              <option>Disponible</option>
+              <option>Utilisé</option>
               <option>Maintenance</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Assigned To</label>
+            <label class="block text-sm font-medium text-gray-700">Assigné à</label>
             <input
               v-model="selectedEquipment.assignedTo"
               type="text"
@@ -283,13 +283,13 @@ const openDetailsModal = (equipment) => {
             @click="showEditModal = false"
             class="px-4 py-2 border rounded-md hover:bg-gray-50"
           >
-            Cancel
+            Annuler
           </button>
           <button
             @click="editEquipment"
             class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
           >
-            Save Changes
+            Sauvegarder les changements
           </button>
         </div>
       </div>
@@ -298,18 +298,18 @@ const openDetailsModal = (equipment) => {
     <!-- Details Modal -->
     <div v-if="showDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div class="bg-white p-6 rounded-lg w-full max-w-md">
-        <h2 class="text-xl font-bold mb-4">Equipment Details</h2>
+        <h2 class="text-xl font-bold mb-4">Détails de l'Équipement</h2>
         <div class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Type</label>
             <p class="mt-1 text-gray-900">{{ selectedEquipment.type }}</p>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Model</label>
+            <label class="block text-sm font-medium text-gray-700">Modèle</label>
             <p class="mt-1 text-gray-900">{{ selectedEquipment.model }}</p>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Serial Number</label>
+            <label class="block text-sm font-medium text-gray-700">Numéro de série</label>
             <p class="mt-1 text-gray-900">{{ selectedEquipment.serialNumber }}</p>
           </div>
           <div>
@@ -318,8 +318,8 @@ const openDetailsModal = (equipment) => {
               <span
                 :class="{
                   'px-2 py-1 text-xs font-medium rounded-full': true,
-                  'bg-green-100 text-green-800': selectedEquipment.status === 'Available',
-                  'bg-yellow-100 text-yellow-800': selectedEquipment.status === 'In Use',
+                  'bg-green-100 text-green-800': selectedEquipment.status === 'Disponible',
+                  'bg-yellow-100 text-yellow-800': selectedEquipment.status === 'Utilisé',
                   'bg-red-100 text-red-800': selectedEquipment.status === 'Maintenance'
                 }"
               >
@@ -328,7 +328,7 @@ const openDetailsModal = (equipment) => {
             </p>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700">Assigned To</label>
+            <label class="block text-sm font-medium text-gray-700">Assigné à</label>
             <p class="mt-1 text-gray-900">{{ selectedEquipment.assignedTo }}</p>
           </div>
         </div>
@@ -337,7 +337,7 @@ const openDetailsModal = (equipment) => {
             @click="showDetailsModal = false"
             class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
           >
-            Close
+            Fermer
           </button>
         </div>
       </div>

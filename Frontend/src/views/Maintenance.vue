@@ -35,8 +35,8 @@ const formatDate = (date) => {
 <template>
   <div class="p-8">
     <div class="mb-6">
-      <h1 class="text-2xl font-bold text-gray-900">Maintenance Schedule</h1>
-      <p class="mt-2 text-gray-600">Manage equipment currently under maintenance</p>
+      <h1 class="text-2xl font-bold text-gray-900">Horaire de Maintenance</h1>
+      <p class="mt-2 text-gray-600">Gérer les équipements actuellement en maintenance</p>
     </div>
 
     <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
@@ -44,9 +44,9 @@ const formatDate = (date) => {
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Equipment</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipment</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Serial Number</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Numéro de série</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
@@ -69,7 +69,7 @@ const formatDate = (date) => {
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                  In Maintenance
+                  En Maintenance
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -77,13 +77,13 @@ const formatDate = (date) => {
                   @click.stop="completeMaintenance"
                   class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 >
-                  Complete Maintenance
+                  Compléter la Maintenance
                 </button>
               </td>
             </tr>
             <tr v-if="maintenanceItems.length === 0">
               <td colspan="5" class="px-6 py-8 text-center text-gray-500">
-                No equipment currently under maintenance
+                Vous n'avez aucun équipement actuellement en maintenance
               </td>
             </tr>
           </tbody>
