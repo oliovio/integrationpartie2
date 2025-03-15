@@ -14,6 +14,11 @@ const notification = ref({
 });
 
 const isSubmitting = ref(false);
+const errors = ref({
+  name: '',
+  email: '',
+  message: '',
+});
 
 const showNotification = (message, type = 'success') => {
   notification.value = {
@@ -26,7 +31,41 @@ const showNotification = (message, type = 'success') => {
   }, 3000);
 };
 
+// Client-side validation function
+const validateForm = () => {
+  errors.value = { name: '', email: '', message: '' };
+  let valid = true;
+
+  if (!form.value.name.trim()) {
+    errors.value.name = "Name is required.";
+    valid = false;
+  } else if (form.value.name.length < 2) {
+    errors.value.name = "Name must be at least 2 characters.";
+    valid = false;
+  }
+
+  if (!form.value.email.trim()) {
+    errors.value.email = "Email is required.";
+    valid = false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) {
+    errors.value.email = "Invalid email format.";
+    valid = false;
+  }
+
+  if (!form.value.message.trim()) {
+    errors.value.message = "Message is required.";
+    valid = false;
+  } else if (form.value.message.length < 10) {
+    errors.value.message = "Message must be at least 10 characters.";
+    valid = false;
+  }
+
+  return valid;
+};
+
 const handleSubmit = async () => {
+  if (!validateForm()) return;
+
   isSubmitting.value = true;
   try {
     // Simulating API call
@@ -49,10 +88,10 @@ const handleSubmit = async () => {
           <div class="relative">
             <div class="sm:text-center">
               <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Contactez nous
+                Contact Us
               </h2>
               <p class="mx-auto mt-6 max-w-2xl text-lg text-blue-100">
-                Vous avez des questions quant à nos services? Envoyez la nous et nous vous réponderonts sous peu!
+                Do you have questions about our services? Send them to us, and we will respond shortly!
               </p>
             </div>
             
@@ -77,9 +116,9 @@ const handleSubmit = async () => {
                       type="text" 
                       name="name" 
                       id="name"
-                      required
                       class="block w-full rounded-md border-blue-300 px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
                     >
+                    <p v-if="errors.name" class="text-red-500 text-xs mt-1">{{ errors.name }}</p>
                   </div>
                 </div>
                 <div>
@@ -90,9 +129,9 @@ const handleSubmit = async () => {
                       type="email" 
                       name="email" 
                       id="email"
-                      required
                       class="block w-full rounded-md border-blue-300 px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
                     >
+                    <p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
                   </div>
                 </div>
                 <div class="sm:col-span-2">
@@ -103,9 +142,9 @@ const handleSubmit = async () => {
                       id="message" 
                       name="message" 
                       rows="4"
-                      required
                       class="block w-full rounded-md border-blue-300 px-4 py-3 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600"
                     ></textarea>
+                    <p v-if="errors.message" class="text-red-500 text-xs mt-1">{{ errors.message }}</p>
                   </div>
                 </div>
                 <div class="sm:col-span-2">

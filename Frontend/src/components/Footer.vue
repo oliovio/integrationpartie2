@@ -1,24 +1,24 @@
 <script setup>
 const navigation = {
   solutions: [
-    { name: 'Suivi d\'équipment', href: '/equipment' },
+    { name: 'Equipment Tracking', href: '/equipment' },
     { name: 'Maintenance', href: '/maintenance' },
-    { name: 'Analytiques', href: '/analytics' },
-    { name: 'Rapports', href: '/reports' },
+    { name: 'Analytics', href: '/analytics' },
+    { name: 'Reports', href: '/reports' },
   ],
   support: [
     { name: 'Documentation', href: '#' },
     { name: 'Guides', href: '#' },
-    { name: 'Status API', href: '#' },
+    { name: 'API Status', href: '#' },
   ],
   company: [
-    { name: 'À propos', href: '#' },
-    { name: 'Blogue', href: '#' },
-    { name: 'Partenaires', href: '#' },
+    { name: 'About Us', href: '#' },
+    { name: 'Blog', href: '#' },
+    { name: 'Partners', href: '#' },
   ],
   legal: [
-    { name: 'Confidentialité', href: '#' },
-    { name: 'Termes', href: '#' },
+    { name: 'Privacy Policy', href: '#' },
+    { name: 'Terms', href: '#' },
   ],
   social: [
     {
@@ -54,7 +54,7 @@ const navigation = {
             <span class="ml-2 text-2xl font-bold text-white">CortexIT</span>
           </div>
           <p class="text-sm leading-6 text-gray-300">
-            Pour une solution de gestion d'équipement IT simple, efficicace, et fiable.
+            A simple, efficient, and reliable IT equipment management solution.
           </p>
           <div class="flex space-x-6">
             <a v-for="item in navigation.social" :key="item.name" :href="item.href" class="text-gray-500 hover:text-gray-400">
@@ -75,7 +75,7 @@ const navigation = {
                 </li>
               </ul>
             </div>
-            <div class="mt-10 md:mt-0">
+            <div>
               <h3 class="text-sm font-semibold leading-6 text-white">Support</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.support" :key="item.name">
@@ -84,28 +84,10 @@ const navigation = {
               </ul>
             </div>
           </div>
-          <div class="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <h3 class="text-sm font-semibold leading-6 text-white">Notre companie</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.company" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-gray-300 hover:text-white">{{ item.name }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-white">Légalités</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.legal" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-gray-300 hover:text-white">{{ item.name }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
       <div class="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
-        <p class="text-xs leading-5 text-gray-400">&copy; 2025 CortexIT. Tout droit réservé.</p>
+        <p class="text-xs leading-5 text-gray-400">&copy; 2025 CortexIT. All rights reserved.</p>
       </div>
     </div>
   </footer>

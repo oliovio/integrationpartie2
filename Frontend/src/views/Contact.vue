@@ -35,11 +35,13 @@
                 <div class="mt-2.5">
                   <input
                     v-model="form.name"
+                    @input="validateField('name')"
                     type="text"
                     name="name"
                     id="name"
                     autocomplete="name"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                    :class="{ 'border-red-500 ring-red-500': form.errors.name }"
                   />
                   <p v-if="form.errors.name" class="text-red-500 text-xs mt-1">{{ form.errors.name }}</p>
                 </div>
@@ -49,11 +51,13 @@
                 <div class="mt-2.5">
                   <input
                     v-model="form.email"
+                    @input="validateField('email')"
                     type="email"
                     name="email"
                     id="email"
                     autocomplete="email"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                    :class="{ 'border-red-500 ring-red-500': form.errors.email }"
                   />
                   <p v-if="form.errors.email" class="text-red-500 text-xs mt-1">{{ form.errors.email }}</p>
                 </div>
@@ -63,11 +67,13 @@
                 <div class="mt-2.5">
                   <input
                     v-model="form.phone"
+                    @input="validateField('phone')"
                     type="tel"
                     name="phone"
                     id="phone"
                     autocomplete="tel"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                    :class="{ 'border-red-500 ring-red-500': form.errors.phone }"
                   />
                   <p v-if="form.errors.phone" class="text-red-500 text-xs mt-1">{{ form.errors.phone }}</p>
                 </div>
@@ -77,10 +83,12 @@
                 <div class="mt-2.5">
                   <textarea
                     v-model="form.message"
+                    @input="validateField('message')"
                     name="message"
                     id="message"
                     rows="4"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                    :class="{ 'border-red-500 ring-red-500': form.errors.message }"
                   ></textarea>
                   <p v-if="form.errors.message" class="text-red-500 text-xs mt-1">{{ form.errors.message }}</p>
                 </div>
@@ -111,43 +119,53 @@ const form = ref({
   email: '',
   phone: '',
   message: '',
-  errors: {
-    name: null,
-    email: null,
-    phone: null,
-    message: null,
-  }
+  errors: {}
 });
 
 const isSubmitting = ref(false);
 
+// Real-time validation for individual fields
+const validateField = (field) => {
+  if (field === "name") {
+    form.value.errors.name = form.value.name.length < 2 ? "Name must be at least 2 characters." : "";
+  }
+  if (field === "email") {
+    form.value.errors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)
+      ? ""
+      : "Invalid email address.";
+  }
+  if (field === "phone") {
+    form.value.errors.phone = form.value.phone.trim() ? "" : "Phone number is required.";
+  }
+  if (field === "message") {
+    form.value.errors.message = form.value.message.length < 10
+      ? "Message must be at least 10 characters."
+      : "";
+  }
+};
+
 const handleSubmit = async () => {
-  if (!form.value.name || form.value.name.length < 2) {
-    alert('Name must be at least 2 characters long.');
-    return;
+  form.value.errors = {}; // Reset errors
+
+  validateField("name");
+  validateField("email");
+  validateField("phone");
+  validateField("message");
+
+  if (Object.values(form.value.errors).some(error => error)) {
+    return; // Stop submission if any error exists
   }
-  if (!form.value.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) {
-    alert('Invalid email address.');
-    return;
-  }
-  if (!form.value.phone) {
-    alert('Phone number is required.');
-    return;
-  }
-  if (!form.value.message || form.value.message.length < 10) {
-    alert('Message must be at least 10 characters long.');
-    return;
-  }
+
   isSubmitting.value = true;
   try {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
     alert('Message sent successfully!');
     form.value = {
       name: '',
       email: '',
       phone: '',
-      message: ''
+      message: '',
+      errors: {}
     };
   } catch (error) {
     alert('Failed to send message. Please try again.');
