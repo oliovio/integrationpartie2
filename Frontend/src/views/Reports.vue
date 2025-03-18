@@ -1,54 +1,8 @@
 <template>
-<<<<<<< HEAD
-  <div class="p-6">
-    <h1 class="text-2xl font-bold text-gray-900">Survol de la gestion des Équipements</h1>
-    <p class="mt-2 text-gray-600">Faites des suivis de vos maintenances, coûts, et de la durée de vue de vos équipements.</p>
-
-    <div class="mt-6">
-      <label for="dateRange" class="block text-sm font-medium text-gray-700">Plage horaire</label>
-      <input type="date" v-model="startDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
-      <input type="date" v-model="endDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
-    </div>
-
-    <div class="mt-4">
-      <label for="department" class="block text-sm font-medium text-gray-700">Départment</label>
-      <select v-model="selectedDepartment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-        <option value="">Tous les Départments</option>
-        <option v-for="dept in departments" :key="dept.id" :value="dept.name">{{ dept.name }}</option>
-      </select>
-    </div>
-
-    <button @click="fetchReports" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Généré un Overview</button>
-
-    <table class="min-w-full divide-y divide-gray-200 mt-6">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipment</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dernière Maintenance</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coût</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durée de vie</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="item in equipmentData" :key="item.id">
-          <td class="px-6 py-4 whitespace-nowrap">{{ item.equipment }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ item.status }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ item.lastMaintenance }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ item.cost }}</td>
-          <td class="px-6 py-4 whitespace-nowrap">{{ item.lifespan }} Années</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="mt-6">
-      <button @click="exportReport" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Exporter le rapport</button>
-    </div>
-=======
   <div class="p-6 max-w-7xl mx-auto">
     <!-- Heading and "Add New Equipment" button -->
     <div class="flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-bold text-gray-900">Equipment List</h1>
+      <h1 class="text-2xl font-bold text-gray-900">Rapports</h1>
       <button
         @click="openAddModal()"
         class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
@@ -71,10 +25,10 @@
         <thead class="bg-gray-100">
           <tr>
             <th class="px-4 py-2">Type</th>
-            <th class="px-4 py-2">Model</th>
-            <th class="px-4 py-2">Serial Number</th>
+            <th class="px-4 py-2">Modèle</th>
+            <th class="px-4 py-2">Numéro de série</th>
             <th class="px-4 py-2">Status</th>
-            <th class="px-4 py-2">Assigned To</th>
+            <th class="px-4 py-2">Assigné à</th>
             <th class="px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -93,14 +47,14 @@
                 class="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
                 @click="editEquipment(item)"
               >
-                Edit
+                Modifier
               </button>
               <!-- Delete Button -->
               <button
                 class="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
                 @click="deleteEquipment(item.id)"
               >
-                Delete
+                Supprimer
               </button>
             </td>
           </tr>
@@ -116,7 +70,7 @@
       >
         <div class="bg-white p-6 rounded shadow-md w-full max-w-md mx-4">
           <h2 class="text-xl font-bold mb-4">
-            {{ isEditing ? 'Edit Equipment' : 'Add New Equipment' }}
+            {{ isEditing ? 'Modifier l\'Équipment' : 'Ajouter un Équipment' }}
           </h2>
           <!-- Form Fields -->
           <div class="mb-4">
@@ -129,7 +83,7 @@
             />
           </div>
           <div class="mb-4">
-            <label class="block font-semibold mb-1">Model *</label>
+            <label class="block font-semibold mb-1">Modèle *</label>
             <input
               v-model="formData.model"
               type="text"
@@ -138,7 +92,7 @@
             />
           </div>
           <div class="mb-4">
-            <label class="block font-semibold mb-1">Serial Number *</label>
+            <label class="block font-semibold mb-1">Numéro de série *</label>
             <input
               v-model="formData.serialNumber"
               type="text"
@@ -152,14 +106,14 @@
               v-model="formData.status"
               class="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
             >
-              <option value="">Select status</option>
-              <option value="Available">Available</option>
-              <option value="In Use">In Use</option>
+              <option value="">Choisir status</option>
+              <option value="Available">Disponible</option>
+              <option value="In Use">Utilisé</option>
               <option value="Maintenance">Maintenance</option>
             </select>
           </div>
           <div class="mb-4">
-            <label class="block font-semibold mb-1">Assigned To</label>
+            <label class="block font-semibold mb-1">Assigné à</label>
             <input
               v-model="formData.assignedTo"
               type="text"
@@ -189,7 +143,6 @@
         </div>
       </div>
     </transition>
->>>>>>> bec3898fc2873873aac2b332ba9c857d87a794a4
   </div>
 </template>
 
@@ -355,7 +308,7 @@ const saveEquipment = () => {
 
 // Deletes an equipment item
 const deleteEquipment = (id) => {
-  if (confirm('Are you sure you want to delete this equipment?')) {
+  if (confirm('Êtes vous certains de vouloir suprimmer ce rapport?')) {
     equipmentList.value = equipmentList.value.filter((e) => e.id !== id);
   }
 };

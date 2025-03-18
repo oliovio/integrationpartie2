@@ -13,13 +13,8 @@ const reviews = [
     id: 1,
     content: "Le dashboard donne une idée claire du status de enos équipement. C'est une grande optimisation de nos ressources.",
     author: "Michel Troo",
-<<<<<<< HEAD
     role: "Gestionnaire des Opérations",
     company: "Type Acier Ltd.",
-=======
-    role: "Operations Manager",
-    company: "Global Systems Ltd.",
->>>>>>> bec3898fc2873873aac2b332ba9c857d87a794a4
     rating: 5,
     image: "https://www.geek-days.com/wp-content/uploads/2022/09/Fildrong-500x500-1.jpg"
   },
@@ -40,10 +35,10 @@ const reviews = [
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Trusted by Industry Leaders
+          Reconnu par les leaders de l'industrie
         </h2>
         <p class="mt-4 text-lg leading-8 text-gray-600">
-          Here's what CortexIT clients have to say about our IT equipment management system.
+          Voici ce que les clients de CortexIT ont à dire sur notre système de gestion d'équipement.
         </p>
       </div>
       <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">

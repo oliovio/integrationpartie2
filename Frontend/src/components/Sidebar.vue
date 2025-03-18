@@ -4,7 +4,7 @@
       <!-- Logo -->
       <div class="flex items-center px-6 py-4 border-b border-gray-200">
         <router-link to="/" class="flex items-center space-x-2">
-          <ComputerDesktopIcon class="h-8 w-8 text-blue-600" />
+          <img class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" src="../assets/logo.png">
           <span class="text-xl font-semibold text-gray-900">CortexIT</span>
         </router-link>
       </div>
@@ -67,11 +67,11 @@ import {
 const route = useRoute();
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Equipment', href: '/equipment', icon: ComputerDesktopIcon },
+  { name: 'Tableau de bord', href: '/dashboard', icon: HomeIcon },
+  { name: 'Équipment', href: '/equipment', icon: ComputerDesktopIcon },
   { name: 'Maintenance', href: '/maintenance', icon: WrenchScrewdriverIcon },
-  { name: 'Reports', href: '/reports', icon: ChartBarIcon },
-  { name: 'Departments', href: '/departments', icon: BuildingOfficeIcon },
+  { name: 'Rapports', href: '/reports', icon: ChartBarIcon },
+  { name: 'Départments', href: '/departments', icon: BuildingOfficeIcon },
 ];
 
 const isActive = (path) => {

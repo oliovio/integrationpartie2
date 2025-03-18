@@ -10,7 +10,7 @@ const form = ref({
 const notification = ref({
   show: false,
   message: '',
-  type: 'success'
+  type: 'succès'
 });
 
 const isSubmitting = ref(false);
@@ -20,7 +20,7 @@ const errors = ref({
   message: '',
 });
 
-const showNotification = (message, type = 'success') => {
+const showNotification = (message, type = 'succès') => {
   notification.value = {
     show: true,
     message,
@@ -37,26 +37,26 @@ const validateForm = () => {
   let valid = true;
 
   if (!form.value.name.trim()) {
-    errors.value.name = "Name is required.";
+    errors.value.name = "Un nom est requis.";
     valid = false;
   } else if (form.value.name.length < 2) {
-    errors.value.name = "Name must be at least 2 characters.";
+    errors.value.name = "Votre nom doit contenir au moin 2 caractères.";
     valid = false;
   }
 
   if (!form.value.email.trim()) {
-    errors.value.email = "Email is required.";
+    errors.value.email = "Une addresse email est requise.";
     valid = false;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) {
-    errors.value.email = "Invalid email format.";
+    errors.value.email = "Addresse email invalide.";
     valid = false;
   }
 
   if (!form.value.message.trim()) {
-    errors.value.message = "Message is required.";
+    errors.value.message = "Un message est requis.";
     valid = false;
   } else if (form.value.message.length < 10) {
-    errors.value.message = "Message must be at least 10 characters.";
+    errors.value.message = "Le message doit contenir au moin 10 caractères.";
     valid = false;
   }
 
@@ -70,10 +70,10 @@ const handleSubmit = async () => {
   try {
     // Simulating API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    showNotification('Message sent successfully!');
+    showNotification('Message envoyé avec succès!');
     form.value = { name: '', email: '', message: '' };
   } catch (error) {
-    showNotification('Failed to send message. Please try again.', 'error');
+    showNotification('Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer.', 'error');
   } finally {
     isSubmitting.value = false;
   }
@@ -88,10 +88,10 @@ const handleSubmit = async () => {
           <div class="relative">
             <div class="sm:text-center">
               <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Contact Us
+                Contactez nous
               </h2>
               <p class="mx-auto mt-6 max-w-2xl text-lg text-blue-100">
-                Do you have questions about our services? Send them to us, and we will respond shortly!
+                Vous avez des question par rapport à nos services? Envoyez la nous et nous vouz réponderonts sous peu!
               </p>
             </div>
             
@@ -109,7 +109,7 @@ const handleSubmit = async () => {
             <form @submit.prevent="handleSubmit" class="mt-12 sm:mx-auto sm:max-w-lg">
               <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                 <div>
-                  <label for="name" class="block text-sm font-medium text-blue-100">Name</label>
+                  <label for="name" class="block text-sm font-medium text-blue-100">Nom</label>
                   <div class="mt-1">
                     <input 
                       v-model="form.name"
@@ -153,7 +153,7 @@ const handleSubmit = async () => {
                     :disabled="isSubmitting"
                     class="w-full rounded-md border border-transparent bg-white py-3 px-6 text-base font-medium text-blue-600 shadow-sm hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 disabled:opacity-75 disabled:cursor-not-allowed"
                   >
-                    {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                    {{ isSubmitting ? 'Envoi...' : 'Message envoyé' }}
                   </button>
                 </div>
               </div>

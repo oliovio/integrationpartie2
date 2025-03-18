@@ -20,34 +20,34 @@ const validateForm = () => {
   let isValid = true;
 
   if (!form.value.name.trim()) {
-    form.value.errors.name = "Full name is required.";
+    form.value.errors.name = "Veuillez entrer votre nom complet.";
     isValid = false;
   } else if (form.value.name.length < 2) {
-    form.value.errors.name = "Full name must be at least 2 characters.";
+    form.value.errors.name = "Votre nom complet doit contenir au moin 2 caractères.";
     isValid = false;
   }
 
   if (!form.value.email.trim()) {
-    form.value.errors.email = "Email is required.";
+    form.value.errors.email = "L'addresse email est requise.";
     isValid = false;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) {
-    form.value.errors.email = "Invalid email format.";
+    form.value.errors.email = "Addresse email invalide.";
     isValid = false;
   }
 
   if (!form.value.password.trim()) {
-    form.value.errors.password = "Password is required.";
+    form.value.errors.password = "Un mot de passe est requis.";
     isValid = false;
   } else if (form.value.password.length < 6) {
-    form.value.errors.password = "Password must be at least 6 characters.";
+    form.value.errors.password = "Votre mot de passe doit contenir au moin 6 caractères.";
     isValid = false;
   }
 
   if (!form.value.confirmPassword.trim()) {
-    form.value.errors.confirmPassword = "Please confirm your password.";
+    form.value.errors.confirmPassword = "Confirmer votre mot de passe.";
     isValid = false;
   } else if (form.value.password !== form.value.confirmPassword) {
-    form.value.errors.confirmPassword = "Passwords do not match.";
+    form.value.errors.confirmPassword = "Les mots de passe ne sont pas identiques.";
     isValid = false;
   }
 
@@ -63,12 +63,12 @@ const handleSignup = async () => {
     // Simulate API call (Replace with actual signup logic)
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    alert("Signup successful!");
+    alert("Succès de l'inscription!");
 
     // Redirect to another page after successful signup
     router.push('/dashboard');
   } catch (error) {
-    alert("Signup failed. Please try again.");
+    alert("Une erreure est survenue. Veuillez réessayer.");
   } finally {
     isSubmitting.value = false;
   }
@@ -82,12 +82,12 @@ const handleSignup = async () => {
         <ComputerDesktopIcon class="h-12 w-12 text-blue-600" />
       </div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Create your account
+        Créer votre compte
       </h2>
       <p class="mt-2 text-center text-sm text-gray-600">
-        Or
+        Ou
         <RouterLink to="/login" class="font-medium text-blue-600 hover:text-blue-500">
-          sign in to your existing account
+          Connectez vous depuis un compre préexistant
         </RouterLink>
       </p>
     </div>
@@ -96,7 +96,7 @@ const handleSignup = async () => {
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form class="space-y-6" @submit.prevent="handleSignup">
           <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">Full name</label>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nom complet</label>
             <div class="mt-1">
               <input
                 id="name"
@@ -110,7 +110,7 @@ const handleSignup = async () => {
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+            <label for="email" class="block text-sm font-medium text-gray-700">Addresse email</label>
             <div class="mt-1">
               <input
                 id="email"
@@ -124,7 +124,7 @@ const handleSignup = async () => {
           </div>
 
           <div>
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
             <div class="mt-1">
               <input
                 id="password"
@@ -138,7 +138,7 @@ const handleSignup = async () => {
           </div>
 
           <div>
-            <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm password</label>
+            <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirmez votre mot de passe</label>
             <div class="mt-1">
               <input
                 id="confirm-password"
@@ -157,7 +157,7 @@ const handleSignup = async () => {
               :disabled="isSubmitting"
               class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
             >
-              {{ isSubmitting ? 'Signing up...' : 'Create account' }}
+              {{ isSubmitting ? 'Inscription...' : 'Créer un compte' }}
             </button>
           </div>
         </form>
