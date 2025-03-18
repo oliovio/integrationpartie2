@@ -2,10 +2,10 @@
 const reviews = [
   {
     id: 2,
-    content: "Ce système de gestion de l'équipement à changé la gestion de notre entreprise. Les systèmes de suivie et de maintenance offre une aide précieuse à notre équipe.",
+    content: "This equipment management system has transformed the way we handle our business. The tracking and maintenance systems provide invaluable support to our team.",
     author: "Micheal Afton",
-    role: "Propriétaire / Gestionnaire en chef",
-    company: "Fazbear Entertainement LLC.",
+    role: "Owner / Chief Manager",
+    company: "Fazbear Entertainment LLC.",
     rating: 5,
     image: "https://www.pearlanddean.com/wp-content/uploads/2025/01/uuiddaef48c6-a2ca-4abb-aa2e-ca357af7dd12groupId10139t1738321880754.jpg"
   },
@@ -13,8 +13,13 @@ const reviews = [
     id: 1,
     content: "Le dashboard donne une idée claire du status de enos équipement. C'est une grande optimisation de nos ressources.",
     author: "Michel Troo",
+<<<<<<< HEAD
     role: "Gestionnaire des Opérations",
     company: "Type Acier Ltd.",
+=======
+    role: "Operations Manager",
+    company: "Global Systems Ltd.",
+>>>>>>> bec3898fc2873873aac2b332ba9c857d87a794a4
     rating: 5,
     image: "https://www.geek-days.com/wp-content/uploads/2022/09/Fildrong-500x500-1.jpg"
   },
@@ -35,10 +40,10 @@ const reviews = [
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Recconue par les Leader de l'industrie
+          Trusted by Industry Leaders
         </h2>
         <p class="mt-4 text-lg leading-8 text-gray-600">
-          Voici ce que les clients de CortexIT ont à dire sur notre système de gestion d'équipement IT.
+          Here's what CortexIT clients have to say about our IT equipment management system.
         </p>
       </div>
       <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
